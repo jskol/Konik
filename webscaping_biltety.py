@@ -26,7 +26,9 @@ ballet_dict=defaultdict(list)
 months=5
 browser=ms.Browser()
 base_url="https://teatrwielki.pl"
-
+headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
+        }
 now_is=datetime.datetime.now()
 while month_it < months: 
     year,month=now_is.year,now_is.month
@@ -34,10 +36,11 @@ while month_it < months:
     url=base_url+"/kalendarium/data/%i/"%year
     url+= "{:0=2d}".format(month) # need two digit number format
     url+= "/#/f/0/1-%i"%num_days
-    page = browser.get(url)
+    page = browser.get(url,headers=headers)
     assert page.status_code==200
     soup=page.soup
 
+    #print(soup)
 
     events=soup.find_all("div", {"class": "event-in"})
 

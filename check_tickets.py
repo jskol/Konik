@@ -1,7 +1,7 @@
 import bs4 as bs
 import mechanicalsoup as ms
 import datetime,re
-from urllib.request import urlopen
+import requests
 
 from event_class import event
 
@@ -18,11 +18,12 @@ def check_for_tickets( url_main:str, event_instance: event) -> int:
     #print(evet_sec)
     # #access the slider menu with tickets and get all the events
     for event in evet_sec:
-        #print(event.text)
-        #print(event.find("time")["datetime"])
-        if event.find("time")["datetime"]== date_str:
-            print(event.text)
-
+        if(event.find('time',{'datetime':date_str})):
+            check_link=event.find('a')["href"]
+            page_check=requests.get(check_link)
+            if check_link != page_check.url:
+                print("Brak biletów")
+            
 
 
 

@@ -23,7 +23,8 @@ def check_for_tickets( url_main:str, event_instance: event) -> int:
             page_check=requests.get(check_link)
             if check_link != page_check.url:
                 print("Brak biletów")
-            
+            else: 
+                print("Są bilety")        
 
 
 

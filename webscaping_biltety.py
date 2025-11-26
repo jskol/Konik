@@ -8,12 +8,12 @@ import re
 
 from event_class import event
 
-def pick_ballets(events: list[bs.ResultSet]) -> list[event]:
+def pick_ballets(events: list[bs.ResultSet],event_type_name:str ="Balet") -> list[event]:
     ballets=[]
     current_day=datetime.datetime.now()
     for ballet in events:
         event_type=ballet.find("span", {"class":"category"})
-        if event_type is not None and event_type.text=="Balet":
+        if event_type and event_type.text==event_type_name:
             temp_ev=event(ballet)
             if temp_ev.time> current_day:
                 ballets.append(temp_ev)

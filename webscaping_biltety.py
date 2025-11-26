@@ -63,4 +63,5 @@ for it,pg in enumerate(ballet_dict[' Peer Gynt ']):
     print( it, " ", pg.time)
 from check_tickets import check_for_tickets
 
-check_for_tickets(base_url, ballet_dict[' Pinokio '][0])
+for ev in ballet_dict[' Peer Gynt ']:
+    check_for_tickets(base_url, ev)

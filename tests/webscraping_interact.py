@@ -9,7 +9,6 @@ url = "http://olympus.realpython.org/login"
 page = browser.get(url)
 assert page.status_code==200
 soup=page.soup
-#print(soup)
 forms=soup.select("form")[0] # "[0]" because there is only one form and we pick it
 
 forms.select("input")[0]["value"]="zeus"

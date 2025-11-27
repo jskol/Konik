@@ -1,30 +1,18 @@
 import bs4 as bs
-import mechanicalsoup as ms
+import requests
 from urllib.request import urlopen
 
 import datetime
 import calendar
 import re
 
-from event_class import event
-
-def pick_ballets(events: list[bs.ResultSet],event_type_name:str ="Balet") -> list[event]:
-    ballets=[]
-    current_day=datetime.datetime.now()
-    for ballet in events:
-        event_type=ballet.find("span", {"class":"category"})
-        if event_type and event_type.text==event_type_name:
-            temp_ev=event(ballet)
-            if temp_ev.time> current_day:
-                ballets.append(temp_ev)
-
-    return ballets
+from event_class.event_class import event
+from pick_event_type.pick_event_type import pick_eventtype_name
 
 month_it=0
 from collections import defaultdict
 ballet_dict=defaultdict(list)
 months=5
-browser=ms.Browser()
 base_url="https://teatrwielki.pl"
 headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
@@ -36,18 +24,17 @@ while month_it < months:
     url=base_url+"/kalendarium/data/%i/"%year
     url+= "{:0=2d}".format(month) # need two digit number format
     url+= "/#/f/0/1-%i"%num_days
-    page = browser.get(url,headers=headers)
-    assert page.status_code==200
-    soup=page.soup
+    try:
+        page = requests.get(url,headers=headers)
+        page.raise_for_status()
+        soup=bs.BeautifulSoup(page.content,'html.parser')
+        events=soup.find_all("div", {"class": "event-in"})
 
-    #print(soup)
-
-    events=soup.find_all("div", {"class": "event-in"})
-
-    ballets=pick_ballets(events)
-    for ballet in ballets:
-        ballet_dict[ballet.title].append(ballet)
-    #list(map(lambda x: ballet_dict[x.title].append(x), ballets)) # unnecessary creation of an additional list
+        ballets=pick_eventtype_name(events)
+        for ballet in ballets:
+            ballet_dict[ballet.title].append(ballet)
+    except requests.exceptions.HTTPError :
+        print(" Problem z dostępem do strony z wydarzniami dla %i-%i"%(year,month))
     now_is += datetime.timedelta(days=num_days)
     month_it +=1
 
@@ -58,14 +45,10 @@ for it,x in enumerate(list(ballet_dict.keys())):
         out += ": %s"%ballet_dict[x][0].teaser
     print(out)
 
-
-for it,pg in enumerate(ballet_dict[' Peer Gynt ']):
-    print( it, " ", pg.time)
-from check_tickets import check_for_tickets
-
+from check_tickets.check_tickets import check_for_tickets
 event_num=1
 for ballet_name in list(ballet_dict.keys()):
     for ev in ballet_dict[ballet_name]:
-        print("#%i"%event_num)
+        print("#%i: %s"%(event_num,ev.title))
         check_for_tickets(base_url, ev)
         event_num+=1

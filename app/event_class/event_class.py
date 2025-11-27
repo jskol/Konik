@@ -29,8 +29,10 @@ class event:
         teaser=html_piece.find("p",{"class":"teaser"})
         if teaser is not None:
             self.teaser=teaser.text
-            #print(self.teaser)
 
     def __repr__(self)->None:
         dni=["Pon","Wt","Śr","Czw", "Pt","Sb","Nd"]
         return "Title: %s\n Location: %s \n Time: %s (%s)"%(self.title,self.location,self.time, dni[self.time.weekday()])
+    
+    
+

@@ -52,3 +52,4 @@ for ballet_name in list(ballet_dict.keys()):
         print("#%i: %s"%(event_num,ev.title))
         check_for_tickets(base_url, ev)
         event_num+=1
+            

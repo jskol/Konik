@@ -3,3 +3,7 @@ __pycache__/
 
 .pytest_cache/
 .venv/
+
+test/web_scaping_pick_up_links.py
+test/webscaping*
+test/first_*

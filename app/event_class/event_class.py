@@ -30,9 +30,12 @@ class event:
         if teaser is not None:
             self.teaser=teaser.text
 
-    def __repr__(self)->None:
+    def __repr__(self)->str:
         dni=["Pon","Wt","Śr","Czw", "Pt","Sb","Nd"]
-        return "Title: %s\n Location: %s \n Time: %s (%s)"%(self.title,self.location,self.time, dni[self.time.weekday()])
-    
-    
+        str_to_print= "Title: %s\n Location: %s \n Time: %s (%s)"%(self.title,self.location,self.time, dni[self.time.weekday()])
+        if self.free_seats > 0:
+            str_to_print += "\n Free seats: %i"%(self.free_seats)
+        return str_to_print
 
+    def update_ticket_num(self,tickets_left:int)->None:
+        self.free_seats=tickets_left

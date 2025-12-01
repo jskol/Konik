@@ -21,4 +21,4 @@ from event_dict.update_dict import update_shows_dict
 
 #print("Pre-update: ", ballet_dict)
 update_shows_dict(ballet_dict, web_page.base_url)
-print("After update: ", ballet_dict)
+#print("After update: ", ballet_dict)

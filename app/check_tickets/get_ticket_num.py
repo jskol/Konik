@@ -19,10 +19,11 @@ def get_ticket_num(link:str)->int:
             val= re.sub('\'','',text.group().rstrip(';')).split('=')[-1]
             payload[key_names]=val
         repsonse=requests.post(url_for_ticketer,params=payload)
+        #print(repsonse.url)
         repsonse.raise_for_status()
         num_of_seats=0
         for seat in repsonse.json().get('miejsca'):
-            if seat['class']!= 'z' and seat['class'] != 'x':
+            if seat['class'] != 'z' and seat['class'] != 'x':
                 #print(seat)
                 num_of_seats +=1
         return num_of_seats
@@ -43,18 +44,25 @@ def get_number_of_sections(link : str)->list[dict[str, str | int]]:
             room_layout=[]
             for ent in init_resp.json().get('data'):
                 room_layout.append(ent)
+            
             return room_layout
         except requests.exceptions.HTTPError:
             print("Page is missing")
 
 
 def iterate_over_room_layout(link : str)->int:
+    
     layout = get_number_of_sections(link)
+    #print("layout: ", layout)
     total_ticket_num=0
     for sections in layout:
         sec_id=sections['id_wizualizacji']
-        new_link=re.sub('&wiz_id=*.?&','&wiz_id=%s&'%sec_id,link)
+        #print(sec_id)
+        new_link=re.sub('&wiz_id=...','&wiz_id=%s'%(sec_id),link)
+        #print(new_link)
         ticket_num=get_ticket_num(new_link)
         total_ticket_num += ticket_num
         print("sector %i has %i tickets in %s"%(sec_id,ticket_num,sections['nazwa_wizualizacji']))
+    
+    print(total_ticket_num)
     return total_ticket_num

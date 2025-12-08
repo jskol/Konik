@@ -10,7 +10,7 @@ from web_page_details import web_page
 from event_class.event_class import event
 from pick_event_type.pick_event_type import pick_eventtype_name
 
-def gen_event_dict(page:web_page, months_to_check:int, print_events:bool =True)-> dict[str,list[event]]:
+def gen_event_dict(page:web_page, months_to_check:int, event_type_name:str="Balet",print_events:bool =True)-> dict[str,list[event]]:
     month_it=0
     ballet_dict=defaultdict(list)
     headers = {
@@ -29,7 +29,7 @@ def gen_event_dict(page:web_page, months_to_check:int, print_events:bool =True)-
             soup=bs4.BeautifulSoup(sub_page.content,'html.parser')
             events=soup.find_all("div", {"class": "event-in"})
 
-            ballets=pick_eventtype_name(events)
+            ballets=pick_eventtype_name(events,event_type_name= event_type_name)
             for ballet in ballets:
                 ballet_dict[ballet.title].append(ballet)
         except requests.exceptions.HTTPError :

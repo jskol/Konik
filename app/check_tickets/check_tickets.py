@@ -8,7 +8,7 @@ curr_dir=os.path.dirname(os.path.abspath(__file__)) #
 parent_dir = os.path.dirname(curr_dir) #get parent
 sys.path.append(parent_dir)
 from event_class.event_class import event
-
+from check_tickets.get_ticket_num import iterate_over_room_layout
 
 def check_for_tickets( url_main:str, event_instance: event, print_res:bool=True) -> int: 
     #This function will in future return the number of tikets left hence return int
@@ -19,43 +19,27 @@ def check_for_tickets( url_main:str, event_instance: event, print_res:bool=True)
     try:
         subpage_request=requests.get(url)
         subpage_request.raise_for_status()
-        subpage=bs.BeautifulSoup(subpage_request.content,'html.parser')
+        subpage=bs.BeautifulSoup(subpage_request.content,'html.parser')  
+        event_sec=subpage.find('time',{'datetime':date_str})
         
-        evet_sec=subpage.find("div", {"class":"slider slider-3-dates content-box"}).find_all("li")
-        # #access the slider menu with tickets and get all the events
-        for event in evet_sec:
-            temp_time=event.find('small').text.split()[-1]
-            if(
-                event.find('time',{'datetime':date_str})
-                and temp_time==date_hour
-                ):
-                
-                check_link=event.find('a')["href"]
-                subpage_check=requests.get(check_link)
-                #there is a redirection build-in
-                #so one needs to check if the rediration
-                #is to the error page, and not if the
-                # target and opened page urls match
-                error_link="%i&termtoscroll"%event_instance.time.year           
-                avaiability_str=None
-               
-                if re.search(error_link, subpage_check.url):
-                    avaiability_str="Brak biletów"
-                    ticket_num=0
-                else:
-                    avaiability_str="Są bilety"
-                    ticket_num=1
-                    event_instance.update_ticket_num(ticket_num)
-
-                if avaiability_str is not None:
-                    if print_res:
-                        print(event_instance.title, " o ", event_instance.time, "-> ", avaiability_str )
-                    return ticket_num
-                
-                else:
-                    print("Strange behavior @: ", subpage_check.url)
-                
-                
+        link_to_check=event_sec.find_parent("li").find('a')['href']
+        subpage_check=requests.get(link_to_check)
+        #there is a redirection build-in the webpage
+        #so one needs to check if the redirection
+        #is to the error page, and not if the
+        # target and opened page urls match
+        error_link="%i&termtoscroll"%event_instance.time.year
+        if re.search(error_link, subpage_check.url):
+            if print_res:
+                print("Brak biletów na %s (%s)"%(event_instance.title,date_str))
+            return 0
+        else:
+            if print_res:
+                print("Są bilety na %s (%s)"%(event_instance.title,date_str))
+                print(subpage_check.url)
+            num_of_tickets=iterate_over_room_layout(subpage_check.url)
+            return num_of_tickets
+        
     except requests.exceptions.HTTPError as err:
         print("Błąd w dostępnie do strony z biletami dla tego wydarzenia")
 

@@ -1,0 +1,108 @@
+# .gitlab-ci.yml
+# =========================================================================
+# CI/CD dla projektu wbudowanego (Embedded System)
+# =========================================================================
+
+# Definicja domyślnego obrazu Dockera zawierającego toolchain (np. ARM GCC)
+# Musisz użyć obrazu, który zawiera kompilator dla Twojej architektury (cross-compilation).
+image: registry.gitlab.com/twoja_grupa/twoj_obraz_arm_gcc:latest
+
+# Zdefiniowane fazy (stages)
+stages:
+  - build
+  - test_unit
+  - flash_hardware_test
+  - release
+
+# =========================================================================
+# FAZA 1: BUILD (Kompilacja Krzyżowa)
+# =========================================================================
+
+build_firmware:
+  stage: build
+  script:
+    - echo "Rozpoczynam kompilację krzyżową..."
+    # Uruchomienie kompilacji za pomocą skryptu makefile
+    - make all
+    # Przykładowy wynik: tworzony jest plik .elf, a następnie konwertowany do .bin
+    - ls -l build/
+  artifacts:
+    # Zapisz skompilowany firmware (.bin i .elf) jako artefakty, 
+    # aby były dostępne w kolejnych fazach (Test i Flash)
+    paths:
+      - build/*.bin
+      - build/*.elf
+    expire_in: 1 day # Czas przechowywania artefaktów
+  only:
+    - merge_requests
+    - develop
+
+# =========================================================================
+# FAZA 2: UNIT TESTS (Testy Jednostkowe na Host-PC)
+# =========================================================================
+
+unit_tests:
+  stage: test_unit
+  script:
+    - echo "Uruchamiam szybkie testy jednostkowe (symulowane środowisko/PC)..."
+    # Zakładamy, że masz skompilowany plik wykonywalny do testów
+    - ./build/unit_tests_runner
+    # Wgrywanie raportu JUnit, aby był widoczny w interfejsie GitLab
+    - if [ -f "unit_tests.xml" ]; then mv unit_tests.xml . ; fi
+  artifacts:
+    reports:
+      junit: unit_tests.xml
+  # Testy jednostkowe muszą być uruchamiane dla każdego MR, by szybko weryfikować zmiany
+  only:
+    - merge_requests
+    - develop
+
+# =========================================================================
+# FAZA 3: FLASH & HARDWARE TEST (Wgranie i Testy Integracyjne na Sprzęcie)
+# =========================================================================
+
+hardware_integration_test:
+  stage: flash_hardware_test
+  # To jest kluczowe: zadanie musi być uruchomione na Runnerze podłączonym do sprzętu.
+  tags:
+    - hardware-test-rig
+    - arm-board
+  script:
+    - echo "Uruchamiam testy integracyjne na fizycznym sprzęcie."
+    # 1. Flashowanie: Użycie narzędzia do flashowania (np. OpenOCD, Segger J-Link, dfu-util)
+    - JLink.exe -device NRF52 -if SWD -speed 4000 -CommanderScript flash_script.jlink build/firmware.bin
+    
+    # 2. Uruchomienie skryptu testowego (np. w Pythonie) do komunikacji z urządzeniem
+    # Ten skrypt weryfikuje dane z układu wbudowanego (np. przez port szeregowy lub interfejs)
+    - python3 ./tests/hardware_test_runner.py --firmware build/firmware.bin
+    
+    # 3. Zbieranie Logów/Danych: Logi i raporty z testów sprzętowych
+    - cp /tmp/hardware_logs/test_results.log .
+  # Uruchamiamy testy sprzętowe tylko dla gałęzi integracyjnej (develop)
+  only:
+    - develop
+
+# =========================================================================
+# FAZA 4: RELEASE (Tworzenie Taga i Artefaktu Wydania)
+# =========================================================================
+
+create_release:
+  stage: release
+  # Zadanie uruchamiane tylko, gdy kod jest mergowany do głównej gałęzi (main/master)
+  only:
+    - master
+  script:
+    # Pobierz aktualny numer wersji lub hasz Gita
+    - VERSION=$(cat VERSION_FILE) 
+    - echo "Tworzenie wydania v$VERSION"
+    
+    # Utwórz tag Git dla wydania
+    - git tag -a v$VERSION -m "Release v$VERSION"
+    - git push origin v$VERSION
+    
+    # Opcjonalnie: Użyj GitLab API do utworzenia formalnego wydania (GitLab Release)
+    - curl --header "PRIVATE-TOKEN: $GITLAB_TOKEN" ...
+  artifacts:
+    paths:
+      - build/*.bin # Gotowy plik do produkcji
+    expire_in: never # Przechowuj ten artefakt na stałe (jest to wydanie)

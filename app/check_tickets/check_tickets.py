@@ -35,8 +35,8 @@ def check_for_tickets( url_main:str, event_instance: event, print_res:bool=True)
             return 0
         else:
             if print_res:
-                print("Są bilety na %s (%s)"%(event_instance.title,date_str))
                 print(subpage_check.url)
+            print("Bilety na %s (%s)"%(event_instance.title,date_str))  
             num_of_tickets=iterate_over_room_layout(subpage_check.url)
             return num_of_tickets
         

@@ -2,7 +2,7 @@ import datetime,sys,os
 import bs4 as bs
 
 curr_dir=os.path.dirname(os.path.abspath(__file__)) #
-parent_dir = os.path.dirname(curr_dir) #get parent
+parent_dir = os.path.dirname(curr_dir) #get parent dir
 sys.path.append(parent_dir)
 
 from event_class.event_class import event

@@ -10,7 +10,7 @@ from web_page_details import web_page
 from event_class.event_class import event
 from pick_event_type.pick_event_type import pick_eventtype_name
 
-def gen_event_dict(page:web_page, months_to_check:int, event_type_name:str="Balet",print_events:bool =True)-> dict[str,list[event]]:
+def gen_event_dict(page:web_page, months_to_check:int, event_type_name:str ="Balet",print_events:bool =True)-> dict[str,list[event]]:
     month_it=0
     ballet_dict=defaultdict(list)
     headers = {
@@ -36,6 +36,7 @@ def gen_event_dict(page:web_page, months_to_check:int, event_type_name:str="Bale
             print(" Problem z dostępem do strony z wydarzniami dla %i-%i"%(year,month))
         now_is += datetime.timedelta(days=num_days)
         month_it +=1
+    
     if print_events:
         print("Balety w najbliższych %i miesiącach"% months_to_check)
         for it,x in enumerate(list(ballet_dict.keys())):

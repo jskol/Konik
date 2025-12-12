@@ -1,6 +1,13 @@
 import requests
 import re
-def get_ticket_num(link:str)->int:
+import unicodedata
+import os,sys
+import datetime
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from check_link import check_link,NoTickets
+
+
+def get_ticket_num_in_sector(link:str)->int:
     session=requests.Session()
     init_resp=session.get(link)
     #if init_resp.url != link:
@@ -48,18 +55,37 @@ def get_number_of_sections(link : str)->list[dict[str, str | int]]:
             print("Page is missing")
 
 
+def get_available_tickets(date: datetime.datetime, link : str,  verbose:bool=False)->tuple[int,dict[str,int]]:
+    '''
+    Function returns the tickets to a certain event
+    accepts the link to the event and returns a tuple
+    with total number of free seats and
+    a dict of free seats in sectors
+    '''
+    try:
 
-def iterate_over_room_layout(link : str)->int:
-    layout = get_number_of_sections(link)
-    total_ticket_num=0
-    for sections in layout:
-        sec_id=sections['id_wizualizacji']
-        new_link=re.sub('&wiz_id=\d{1,3}','&wiz_id=%s'%(sec_id),link)
-        ticket_num=get_ticket_num(new_link)
-        total_ticket_num += ticket_num
-        print("sector %i has %i tickets in %s"%(sec_id,ticket_num,sections['nazwa_wizualizacji']))
-    print(total_ticket_num)
-    return total_ticket_num
+        redirected_link=check_link(date,link,verbose)
+        seat_dict={}
+        layout = get_number_of_sections(redirected_link)
+        total_ticket_num=0
+        for sections in layout:
+            sec_id=sections['id_wizualizacji']
+            new_link=re.sub('&wiz_id=\d{1,3}','&wiz_id=%s'%(sec_id),redirected_link)
+            ticket_num=get_ticket_num_in_sector(new_link)
+            total_ticket_num += ticket_num
+            #Trick to substitute polish letters with standard english equivalents
+            name_temp=unicodedata.normalize('NFKD',sections['nazwa_wizualizacji'])
+            name_temp=name_temp.encode('ASCII','ignore').decode('ASCII')
+            ##
+            seat_dict[name_temp]= ticket_num
+            if verbose:
+                print("sector %i has %i tickets in %s"%(sec_id,ticket_num,sections['nazwa_wizualizacji']))
+        if verbose:
+            print(f'overall ticket number is {total_ticket_num}')
+        
+        return total_ticket_num,seat_dict
 
+    except NoTickets:
+        return 0,{}
 
 

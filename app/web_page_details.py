@@ -17,3 +17,5 @@ class web_page:
     def update_base_url(self, new_url:str) -> None:
         self.base_url=new_url
         
+
+page_details=web_page() # Its a singleton

@@ -92,12 +92,12 @@
     {
         "Title": " Pinokio ",
         "Date": "18/12/2025 19:00",
-        "free seats total": 383,
+        "free seats total": 385,
         "1. Plan gowny": 0,
         "Parter": 123,
         "Amfiteatr": 64,
         "Balkon I - lewa strona": 37,
-        "Balkon I - srodek": 70,
+        "Balkon I - srodek": 72,
         "Balkon I - prawa strona": 39,
         "Balkon II - lewa strona": 12,
         "Balkon II - srodek": 0,
@@ -109,14 +109,14 @@
     {
         "Title": " Pinokio ",
         "Date": "19/12/2025 19:00",
-        "free seats total": 386,
+        "free seats total": 373,
         "1. Plan gowny": 0,
-        "Parter": 128,
-        "Amfiteatr": 61,
+        "Parter": 123,
+        "Amfiteatr": 59,
         "Balkon I - lewa strona": 18,
-        "Balkon I - srodek": 112,
-        "Balkon I - prawa strona": 25,
-        "Balkon II - lewa strona": 5,
+        "Balkon I - srodek": 110,
+        "Balkon I - prawa strona": 22,
+        "Balkon II - lewa strona": 4,
         "Balkon II - srodek": 0,
         "Balkon II - prawa strona": 1,
         "Balkon III - lewa strona": 16,
@@ -160,14 +160,14 @@
     {
         "Title": " Pinokio ",
         "Date": "21/12/2025 18:00",
-        "free seats total": 247,
+        "free seats total": 245,
         "1. Plan gowny": 0,
         "Parter": 74,
         "Amfiteatr": 61,
         "Balkon I - lewa strona": 10,
         "Balkon I - srodek": 74,
         "Balkon I - prawa strona": 3,
-        "Balkon II - lewa strona": 2,
+        "Balkon II - lewa strona": 0,
         "Balkon II - srodek": 0,
         "Balkon II - prawa strona": 0,
         "Balkon III - lewa strona": 8,
@@ -177,10 +177,10 @@
     {
         "Title": " Pinokio ",
         "Date": "23/12/2025 19:00",
-        "free seats total": 15,
+        "free seats total": 18,
         "1. Plan gowny": 0,
         "Parter": 0,
-        "Amfiteatr": 4,
+        "Amfiteatr": 7,
         "Balkon I - lewa strona": 0,
         "Balkon I - srodek": 0,
         "Balkon I - prawa strona": 0,
@@ -190,120 +190,5 @@
         "Balkon III - lewa strona": 6,
         "Balkon III - srodek": 0,
         "Balkon III - prawa strona": 5
-    },
-    {
-        "Title": " Moving rooms+ ",
-        "Date": "05/02/2026 19:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Moving rooms+ ",
-        "Date": "06/02/2026 19:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Moving rooms+ ",
-        "Date": "07/02/2026 19:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Moving rooms+ ",
-        "Date": "08/02/2026 18:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Kreacje 18 ",
-        "Date": "12/02/2026 19:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Kreacje 18 ",
-        "Date": "13/02/2026 19:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Kreacje 18 ",
-        "Date": "14/02/2026 12:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Kreacje 18 ",
-        "Date": "14/02/2026 19:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Kreacje 18 ",
-        "Date": "15/02/2026 12:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Peer Gynt ",
-        "Date": "20/02/2026 19:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Peer Gynt ",
-        "Date": "22/02/2026 18:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Peer Gynt ",
-        "Date": "24/02/2026 19:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Peer Gynt ",
-        "Date": "26/02/2026 19:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Peer Gynt ",
-        "Date": "27/02/2026 12:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Peer Gynt ",
-        "Date": "27/02/2026 19:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Peer Gynt ",
-        "Date": "01/03/2026 18:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Peer Gynt ",
-        "Date": "14/03/2026 19:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Peer Gynt ",
-        "Date": "18/03/2026 19:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Peer Gynt ",
-        "Date": "20/03/2026 19:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Bajadera ",
-        "Date": "27/03/2026 19:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Bajadera ",
-        "Date": "28/03/2026 19:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Bajadera ",
-        "Date": "29/03/2026 18:00",
-        "free seats total": 0
-    },
-    {
-        "Title": " Bajadera ",
-        "Date": "31/03/2026 19:00",
-        "free seats total": 0
     }
 ]

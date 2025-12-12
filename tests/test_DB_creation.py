@@ -13,7 +13,7 @@ from app.create_ticket_database.data_base import TicketDBJSON
 DB=TicketDBJSON()
 
 
-ballet_dict=gen_event_dict(page,2,event_type_list[0],False) # generate a dict of plays
+ballet_dict=gen_event_dict(page,4,event_type_list[0],False) # generate a dict of plays
 update_shows_dict(ballet_dict)
 final_dict=export_dict(ballet_dict)
 DB.exportDB(final_dict,'DB')

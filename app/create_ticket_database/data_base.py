@@ -76,7 +76,8 @@ class TicketDataBase(ABC):
         now then previsly. 
         Useses compare two_dict function defined at the top
         Common method for any data base and used as starting
-        point for their own update
+        point for their own update -> 
+        NEED TO ADD REMOVAL OF OLD SHOWS !!!
         '''
         dict_of_new_tickets=compare_two_dicts_of_shows(dict_of_shows,ref_DB) 
         return dict_of_new_tickets

@@ -7,16 +7,38 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from check_link import check_link,NoTickets
 
 
-def get_ticket_num_in_sector(link:str)->int:
+def get_number_of_sections(link : str)->list[dict[str, str | int]]:
+        '''
+        This function extracts the number of
+        sections that the venue is split into
+        '''
+        tag=link.split('?')[-1]
+        url_for_layout = "https://butik.teatrwielki.pl/rezerwacja/numerowane.html"
+        url_for_layout += "?"+tag
+        url_for_layout += "&json=true&jsonType=wizualizacje"
+        try:
+            session=requests.Session()
+            init_resp=session.get(url_for_layout)
+            init_resp.raise_for_status()
+            room_layout=[]
+            for ent in init_resp.json().get('data'):
+                room_layout.append(ent)
+            
+            return room_layout
+        except requests.exceptions.HTTPError:
+            print("Page is missing")
+
+def get_ticket_num_in_sector(link:str)->int|None:
+    '''
+    Extracts the number of tickets in each sector of the venue
+    '''
     session=requests.Session()
     init_resp=session.get(link)
-    #if init_resp.url != link:
-    #    raise Exception("Page was redirected")
     
-    url_for_ticketer="https://butik.teatrwielki.pl/rezerwacja/miejsca-wolne.html"
+    url_for_ticketer="https://butik.teatrwielki.pl/rezerwacja/miejsca-wolne.html" # location of the ticketing page
     try:
         '''
-        construct the payload
+        construct the payload to pass to the ticketing page
         '''
         keys_ticketer=["wiz_id","wiz_idt","ter_id","ter_idt","cen_id"]
         payload={}
@@ -36,25 +58,6 @@ def get_ticket_num_in_sector(link:str)->int:
         print("Page is missing")
     
 
-
-def get_number_of_sections(link : str)->list[dict[str, str | int]]:
-        tag=link.split('?')[-1]
-        url_for_layout = "https://butik.teatrwielki.pl/rezerwacja/numerowane.html"
-        url_for_layout += "?"+tag
-        url_for_layout += "&json=true&jsonType=wizualizacje"
-        try:
-            session=requests.Session()
-            init_resp=session.get(url_for_layout)
-            init_resp.raise_for_status()
-            room_layout=[]
-            for ent in init_resp.json().get('data'):
-                room_layout.append(ent)
-            
-            return room_layout
-        except requests.exceptions.HTTPError:
-            print("Page is missing")
-
-
 def get_available_tickets(date: datetime.datetime, link : str,  verbose:bool=False)->tuple[int,dict[str,int]]:
     '''
     Function returns the tickets to a certain event
@@ -73,10 +76,11 @@ def get_available_tickets(date: datetime.datetime, link : str,  verbose:bool=Fal
             new_link=re.sub('&wiz_id=\d{1,3}','&wiz_id=%s'%(sec_id),redirected_link)
             ticket_num=get_ticket_num_in_sector(new_link)
             total_ticket_num += ticket_num
-            #Trick to substitute polish letters with standard english equivalents
+            #Trick to substitute the polish letters 
+            # with standard english equivalents
             name_temp=unicodedata.normalize('NFKD',sections['nazwa_wizualizacji'])
             name_temp=name_temp.encode('ASCII','ignore').decode('ASCII')
-            ##
+            ########
             seat_dict[name_temp]= ticket_num
             if verbose:
                 print("sector %i has %i tickets in %s"%(sec_id,ticket_num,sections['nazwa_wizualizacji']))
@@ -85,7 +89,7 @@ def get_available_tickets(date: datetime.datetime, link : str,  verbose:bool=Fal
         
         return total_ticket_num,seat_dict
 
-    except NoTickets:
-        return 0,{}
+    except NoTickets: # special error imported from check link module
+        return 0,{} # returns 0 (number of tickets) and an empty dict of seats
 
 

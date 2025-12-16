@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 '''
 Now this is a singleton implementation
+to avoid problems with multiple instaces
 '''
 
 @dataclass
@@ -18,4 +19,4 @@ class web_page:
         self.base_url=new_url
         
 
-page_details=web_page() # Its a singleton
+page_details=web_page() 

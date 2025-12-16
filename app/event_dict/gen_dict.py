@@ -4,13 +4,13 @@ from collections import defaultdict
 
 import os, sys
 curr_dir=os.path.dirname(os.path.abspath(__file__)) #
-parent_dir = os.path.dirname(curr_dir) #get parent
+parent_dir = os.path.dirname(curr_dir) #get parent dir
 sys.path.append(parent_dir)
-from web_page_details import web_page
+from web_page_details import page_details
 from event_class.event_class import event
 from pick_event_type.pick_event_type import pick_eventtype_name
 
-def gen_event_dict(page:web_page, months_to_check:int, event_type_name:str ="Balet",print_events:bool =True)-> dict[str,list[event]]:
+def gen_event_dict(months_to_check:int, event_type_name: str ="Balet",print_events:bool =True)-> dict[str,list[event]]:
     month_it=0
     ballet_dict=defaultdict(list)
     headers = {
@@ -20,7 +20,7 @@ def gen_event_dict(page:web_page, months_to_check:int, event_type_name:str ="Bal
     while month_it < months_to_check: 
         year,month=now_is.year,now_is.month
         num_days = calendar.monthrange(year, month)[1]
-        url=page.base_url+"/kalendarium/data/%i/"%year
+        url=page_details.base_url+"/kalendarium/data/%i/"%year
         url+= "{:0=2d}".format(month) # need two digit number format
         url+= "/#/f/0/1-%i"%num_days
         try:
@@ -37,7 +37,7 @@ def gen_event_dict(page:web_page, months_to_check:int, event_type_name:str ="Bal
         now_is += datetime.timedelta(days=num_days)
         month_it +=1
     
-    if print_events:
+    if print_events: # mainly for basic check-up
         print("Balety w najbliższych %i miesiącach"% months_to_check)
         for it,x in enumerate(list(ballet_dict.keys())):
             out="%i: %s"%(it+1,x)

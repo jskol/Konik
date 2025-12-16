@@ -12,6 +12,22 @@ from web_page_details import page_details
 
 @dataclass
 class event:
+    '''
+    The main building block of the code
+    a dataclass that holds the details of each event
+    defined by :
+    1) title
+    2) location (venue)
+    3) date
+    4) link to its web page
+    5) short description (teaser)
+    6) number of free seats
+    7) a dictionary holding information 
+        on the number of free seats in each
+        sector of the venue
+    '''
+
+
     title:str
     location:str
     time: datetime.datetime

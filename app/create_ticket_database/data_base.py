@@ -83,13 +83,16 @@ class TicketDataBase(ABC):
         return dict_of_new_tickets
 
 
-    def notify(self, dict_of_new_tickets:dict[tuple[str,str],bool], mailing_list: list[str])->None:
+    def notify(self, dict_of_new_tickets:dict[tuple[str,str],bool], mailing_list: list[str])->bool:
         '''
         Some common method to notify people from mailing list of new tickets 
         '''
         if any(dict_of_new_tickets.values()):
             for subscribers in mailing_list:
                 print(f'need to notify {subscribers} about new tickets')
+            return True
+        else:
+            return False
         
 
 
@@ -140,6 +143,8 @@ class TicketDBJSON(TicketDataBase):
 
 class TicketDBXML(TicketDataBase):
     pass
+
+
 
 
 

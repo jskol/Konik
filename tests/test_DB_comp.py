@@ -74,9 +74,9 @@ def test_the_notification_functionality(num_of_monts,list_of_users):
             with open(os.path.join(curr_dir,f'{DB_alt}.json'),'w') as f:
                 json.dump(data,f,indent=4)
 
-    dict1=DB.importDB(DB_name)
+    dict1=DB.importDB(os.path.join(curr_dir,DB_name))
     for DB_alt in DB_alternates:        
-        dict2=DB.importDB(DB_alt)
+        dict2=DB.importDB(os.path.join(curr_dir,DB_alt))
         new_ticket_dict=compare_two_dicts_of_shows(dict1,dict2)
         notification_sent= DB.notify(new_ticket_dict,list_of_users)
   

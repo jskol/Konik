@@ -18,26 +18,47 @@ class User(ABC):
     def __init__(self,name:str, surname:str):
         self.name=name
         self.surname=surname
-        self.criteria={}
+        self.criteria={"sector_exclude": None, 
+                       "sector_include":None,
+                       "price_min":None, 
+                       "price_max":None
+                    } 
 
-    def intersted_in(self,criteria: dict[str,Any])->None:
+    def intersted_in(self,
+                     list_of_excluded_sectors:list[str]=None,
+                      list_of_included_sectors:list[str]=None,
+                      price_min: int = None,
+                      price_max:int=None
+                      )->None:
         '''
         here will be all criterions 
         the user has for the new tickets
         to be interested in them
         '''
-        self.criteria= criteria
-        
+        if list_of_included_sectors:
+            self.criteria["sector_include"]=list_of_included_sectors
+        if list_of_excluded_sectors:
+            self.criteria["sector_exclude"]=list_of_excluded_sectors
+        if price_max:
+            self.criteria["price_max"]=price_max
+        if price_min:
+            self.criteria["price_min"]=price_min
 
     
     def notify(self,list_of_events:dict[tuple[str,str],dict[str,int]])->dict[tuple[str,str],dict[str,int]]:
         intersting_events=list_of_events.copy() #make a copy of list of events to work on
-        for crit in self.criteria.items():
-            '''
-            Do some checks for the interest
-            '''
-            pass
-
+        if self.criteria["sector_exclude"]: # one gave list of sectros to avoid
+            for _,seats in intersting_events.items(): #iterate over all events
+                for remove_sector in self.criteria["sector_exclude"]: #iterate over sectors to remove
+                    seats.pop(remove_sector)
+        
+        if self.criteria["sector_include"]:
+            for _,seats in intersting_events.items(): #iterate over all events
+                for keys in seats.keys():
+                    if keys not in self.criteria["sector_include"] and keys != 'free seats total':
+                        seats.pop(keys)
+                
+        # Do some testing of this functionality
         return intersting_events
 
 

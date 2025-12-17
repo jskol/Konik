@@ -73,7 +73,8 @@ def get_available_tickets(date: datetime.datetime, link : str,  verbose:bool=Fal
         total_ticket_num=0
         for sections in layout:
             sec_id=sections['id_wizualizacji']
-            new_link=re.sub('&wiz_id=\d{1,3}','&wiz_id=%s'%(sec_id),redirected_link)
+            #new_link=re.sub('&wiz_id=\d{1,3}','&wiz_id=%s'%(sec_id),redirected_link)
+            new_link=re.sub(r'&wiz_id=\d{1,3}','&wiz_id=%s'%(sec_id),redirected_link)
             ticket_num=get_ticket_num_in_sector(new_link)
             total_ticket_num += ticket_num
             #Trick to substitute the polish letters 

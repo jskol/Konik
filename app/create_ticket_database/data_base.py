@@ -8,7 +8,7 @@ sys.path.append(os.path.dirname(curr_dir))
 from event_class.event_class import event
 from create_ticket_database.user_class import User
 
-
+# Helper function for comparing two data bases in form of a dicts
 def compare_two_dicts_of_shows(dict_of_shows: dict[tuple[str,str],dict[str,int]], \
                                dict_of_shows_ref: dict[tuple[str,str],dict[str,int]])->\
                                dict[tuple[str,str],bool]:
@@ -75,8 +75,7 @@ class TicketDataBase(ABC):
         now then previsly. 
         Useses compare two_dict function defined at the top
         Common method for any data base and used as starting
-        point for their own update -> 
-        NEED TO ADD REMOVAL OF OLD SHOWS !!!
+        point for their own update 
         '''
         dict_of_new_tickets=compare_two_dicts_of_shows(dict_of_shows,ref_DB) 
 
@@ -157,10 +156,10 @@ class TicketDBJSON(TicketDataBase):
                )\
         ->dict[tuple[str,str],bool] | None:
         '''
-        Overwrites the parent update 
-        adds check if previous state DB exists
-        and deciedes what to do 
-        Retunrs the dict of show- available new tickets
+        -> Overwrites the parent update !!!!
+        -> adds check if previous state DB exists
+            and if it does not then just exports the DB 
+        Returns the dict of show- available new tickets
         '''
         try:
             ref_DB= self.importDB(out_f_name)

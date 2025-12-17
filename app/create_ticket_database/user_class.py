@@ -8,8 +8,13 @@ cur_dir=os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(cur_dir))
 from event_class.event_class import event
 
-class User(ABC):
 
+class User(ABC):
+    '''
+    An abstract user class that holds
+    the name,surname and eventually some
+    criteria for tickets of interest
+    '''
     def __init__(self,name:str, surname:str):
         self.name=name
         self.surname=surname
@@ -35,12 +40,14 @@ class User_Email(User):
         super().__init__(name,surname)
         self.address=address
     
-    def notify(self,list_of_events:list[event]):
-        intersting_events=list_of_events.copy()
+    def notify(self, list_of_events : list[event]):
+        intersting_events=list_of_events.copy() #make a copy of list of events to work on
         for crit in self.criteria.items():
             '''
             Do some checks for the interest
             '''
+            pass
+
         if len(intersting_events)>0:
             print(f'Sending email to {self.name} {self.surname} at {self.address}')
         pass

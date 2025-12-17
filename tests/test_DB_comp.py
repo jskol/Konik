@@ -47,7 +47,7 @@ def test_the_notification_functionality(num_of_monts,list_of_users):
                 ev_keys=list(ev_dict.keys())
                 if len(ev_dict)>3:
                     
-                    sector=random.randint(3,len(ev_dict))
+                    sector=random.randint(3,len(ev_dict)-1)
                     sec_name=ev_keys[sector]
                     seat_num=ev_dict[sec_name]
                     

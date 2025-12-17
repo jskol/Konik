@@ -11,37 +11,31 @@ from create_ticket_database.user_class import User
 # Helper function for comparing two data bases in form of a dicts
 def compare_two_dicts_of_shows(dict_of_shows: dict[tuple[str,str],dict[str,int]], \
                                dict_of_shows_ref: dict[tuple[str,str],dict[str,int]])->\
-                               dict[tuple[str,str],bool]:
+                               dict[tuple[str,str],dict[str,int]]:
     '''
     Universal function comparing two dicts of shows
-    and returning a dict with True if new tickets have pop-up for a given show
+    and returning a dict with location of the new tickets
     '''
     new_ticket_dict={}
     for k,v in dict_of_shows.items(): #iterate over shows
-        send_notification=False
         #skip unnceessary comparisons if there are no tickets
+        # just pass the basic dict (v) with free seast total=0
         if v['free seats total']==0: 
-            continue
+            temp_seating_dict={k:v}
 
-        if k in dict_of_shows_ref:# both DB have the same show -> compare the total of free seats dict
-            
-            #quick test if there is more tickets now then previusly
-            if v['free seats total'] > dict_of_shows_ref[k]['free seats total']:
-                send_notification=True
-
-            elif v['free seats total'] == dict_of_shows_ref[k]['free seats total']:
-                #compare sector-by=sector to not skip when free seats moved
+        else:# There is non-zero tickets for k-event in the most recent DB
+            if k in dict_of_shows_ref:# both DB have the same show -> compare the total of free seats dict
+                temp_seating_dict={}
                 for sec_DB,sec_DB_ref in zip(v.items(),dict_of_shows_ref[k].items()):
+                    new_seats=0
                     if sec_DB[1] > sec_DB_ref[1]:
-                        send_notification=True
-                        break # no need to check for other
-            else: 
-                pass   #do nothing
-
-        else: # new key = new show on the list so notify 
-            send_notification=True
+                        new_seats=sec_DB[1] - sec_DB_ref[1]
+                    temp_seating_dict[sec_DB[0]]=new_seats
         
-        new_ticket_dict[k]=send_notification
+            else: # if k is not int DB_ref bass all tickets there are in DB
+                temp_seating_dict={k:v}      
+
+        new_ticket_dict[k]=temp_seating_dict
     return new_ticket_dict
 
 
@@ -68,7 +62,7 @@ class TicketDataBase(ABC):
     def update(self,\
                dict_of_shows : dict[tuple[str,str],dict[str,int]], \
                ref_DB : dict[tuple[str,str],dict[str,int]])\
-        ->dict[tuple[str,str],bool] |None:
+        ->dict[tuple[str,str],dict[str,int]] |None:
         '''
         This function compares two databases and exports
         a dict of boolian flags if more tickets are available
@@ -84,33 +78,35 @@ class TicketDataBase(ABC):
         for key_tup in list(dict_of_new_tickets.keys()):
             event_time=datetime.datetime.strptime(key_tup[1], '%d/%m/%Y %H:%M')
             if event_time - curr_date < datetime.timedelta(0):
-                
                  dict_of_new_tickets.pop(key_tup)
-
         return dict_of_new_tickets
 
 
     def notify(self, 
-               dict_of_new_tickets:dict[tuple[str,str],bool],
-                 users_list: list[User],
-                 dict_of_shows: dict[tuple[str,str],dict[str,int]]={})->bool:
+               dict_of_new_tickets:dict[tuple[str,str],dict[str,int]],
+                users_list: list[User]
+                )->bool:
         '''
         Some common method to notify people from mailing list of new tickets 
         By default don't need dict of shows, but for future
         when dict of shows will be passed to the notify function it will be
         needed
         '''
-        if any(dict_of_new_tickets.values()):
+        new_tickets={k:v for k,v in dict_of_new_tickets.items() if any(v.values())}
+        if len(new_tickets): # There are tickets to be notify about
             for subscribers in users_list:
                 subscribers.notify(dict_of_new_tickets)
             print('\nAbout new tickets for: ')
-            for k,v in dict_of_new_tickets.items():
-                if v:
-                    print(f'->{k}', end="")     
+            for k,layout in new_tickets.items():
+                print(f'->{k} in :\n\t', end="")
+                for name, tickets in layout.items():
+                    if tickets>0:
+                        print(f'{name} - {tickets}')
             print('\n')
             return True
         else:
             return False
+        
         
 
 
@@ -154,7 +150,7 @@ class TicketDBJSON(TicketDataBase):
                dict_of_shows: dict[tuple[str,str],dict[str,int]],
                out_f_name :str,
                )\
-        ->dict[tuple[str,str],bool] | None:
+        ->dict[tuple[str,str],dict[str,int]] | None:
         '''
         -> Overwrites the parent update !!!!
         -> adds check if previous state DB exists

@@ -29,9 +29,16 @@ class User(ABC):
         self.criteria= criteria
         
 
-    @abstractmethod
-    def notify(self,list_of_events:list[event]):
-        pass
+    
+    def notify(self,list_of_events:dict[tuple[str,str],dict[str,int]])->dict[tuple[str,str],dict[str,int]]:
+        intersting_events=list_of_events.copy() #make a copy of list of events to work on
+        for crit in self.criteria.items():
+            '''
+            Do some checks for the interest
+            '''
+            pass
+
+        return intersting_events
 
 
 class User_Email(User):
@@ -40,14 +47,8 @@ class User_Email(User):
         super().__init__(name,surname)
         self.address=address
     
-    def notify(self, list_of_events : list[event]):
-        intersting_events=list_of_events.copy() #make a copy of list of events to work on
-        for crit in self.criteria.items():
-            '''
-            Do some checks for the interest
-            '''
-            pass
-
+    def notify(self, list_of_events : dict[tuple[str,str],dict[str,int]])->None:
+        intersting_events=super().notify(list_of_events)
         if len(intersting_events)>0:
             print(f'Sending email to {self.name} {self.surname} at {self.address}')
         pass
@@ -58,8 +59,10 @@ class User_Phone(User):
         super().__init__(name,surname)
         self.phone_number=phone_number
 
-    def notify(self,list_of_events:list[event]):
-        print(f'Sending an SMS to {self.name} {self.surname} at {self.phone_number}')
+    def notify(self,list_of_events:dict[tuple[str,str],dict[str,int]])->None:
+        intersting_events=super().notify(list_of_events)
+        if len(intersting_events)>0:
+            print(f'Sending an SMS to {self.name} {self.surname} at {self.phone_number}')
         pass
     
     

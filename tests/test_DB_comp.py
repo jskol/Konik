@@ -13,6 +13,7 @@ from app.create_ticket_database.data_base import TicketDBJSON,compare_two_dicts_
 DB=TicketDBJSON()
 
 
+
 from app.create_ticket_database.user_class import User_Email
 #Create list of users
 U1=User_Email('John','Doe','johndoe@gmail.com')
@@ -36,8 +37,8 @@ def test_the_notification_functionality(num_of_monts,list_of_users):
     DB_alternates=[f'{DB_name}_more',f'{DB_name}_less',f'{DB_name}_same_but_different']
     diff=[4,-4]
     for it,DB_alt in enumerate(DB_alternates):
-        if not os.path.isfile(DB_alt+'.json'):
-            with open(DB_name+".json",'r') as f:
+        if not os.path.isfile(os.path.join(curr_dir,DB_alt+'.json')):
+            with open(os.path.join(curr_dir,DB_name+".json"),'r') as f:
                 data=json.load(f)
             
             update_made=False
@@ -70,7 +71,7 @@ def test_the_notification_functionality(num_of_monts,list_of_users):
                     update_made=True
 
 
-            with open(f'{DB_alt}.json','w') as f:
+            with open(os.path.join(curr_dir,f'{DB_alt}.json'),'w') as f:
                 json.dump(data,f,indent=4)
 
     dict1=DB.importDB(DB_name)

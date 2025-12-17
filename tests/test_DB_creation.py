@@ -25,8 +25,8 @@ def test_dict_to_DB_and_back_transfotmation(num_of_monts):
     ballet_dict=gen_event_dict(num_of_monts,event_type_list[0],False) # generate a dict of plays
     update_shows_dict(ballet_dict)
     final_dict=export_dict(ballet_dict)
-    DB.exportDB(final_dict,f'DB_{num_of_monts}')
-    readDB=DB.importDB(f'DB_{num_of_monts}')
+    DB.exportDB(final_dict,os.path.join(curr_dir,f'DB_{num_of_monts}'))
+    readDB=DB.importDB(os.path.join(curr_dir,f'DB_{num_of_monts}'))
 
     for (k1,v1),(k2,v2) in zip(readDB.items(),final_dict.items()):
         assert k1 == k2

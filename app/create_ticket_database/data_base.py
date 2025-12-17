@@ -1,13 +1,12 @@
 
 from abc import ABC, abstractmethod  
-import unicodedata
-import re 
 import os,sys
+import datetime
 from typing import Any
 curr_dir=os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(curr_dir))
 from event_class.event_class import event
-
+from create_ticket_database.user_class import User
 
 
 def compare_two_dicts_of_shows(dict_of_shows: dict[tuple[str,str],dict[str,int]], \
@@ -80,16 +79,36 @@ class TicketDataBase(ABC):
         NEED TO ADD REMOVAL OF OLD SHOWS !!!
         '''
         dict_of_new_tickets=compare_two_dicts_of_shows(dict_of_shows,ref_DB) 
+
+        # Remove outdated shows (for sanity of the DB)
+        curr_date=datetime.datetime.now()
+        for key_tup in list(dict_of_new_tickets.keys()):
+            event_time=datetime.datetime.strptime(key_tup[1], '%d/%m/%Y %H:%M')
+            if event_time - curr_date < datetime.timedelta(0):
+                
+                 dict_of_new_tickets.pop(key_tup)
+
         return dict_of_new_tickets
 
 
-    def notify(self, dict_of_new_tickets:dict[tuple[str,str],bool], mailing_list: list[str])->bool:
+    def notify(self, 
+               dict_of_new_tickets:dict[tuple[str,str],bool],
+                 users_list: list[User],
+                 dict_of_shows: dict[tuple[str,str],dict[str,int]]={})->bool:
         '''
         Some common method to notify people from mailing list of new tickets 
+        By default don't need dict of shows, but for future
+        when dict of shows will be passed to the notify function it will be
+        needed
         '''
         if any(dict_of_new_tickets.values()):
-            for subscribers in mailing_list:
-                print(f'need to notify {subscribers} about new tickets')
+            for subscribers in users_list:
+                subscribers.notify(dict_of_new_tickets)
+            print('\nAbout new tickets for: ')
+            for k,v in dict_of_new_tickets.items():
+                if v:
+                    print(f'->{k}', end="")     
+            print('\n')
             return True
         else:
             return False
@@ -104,7 +123,16 @@ class TicketDBJSON(TicketDataBase):
         list_of_dicts=[]
         #reacast to a list of dicts
         # JSON does not allow for tuple keys
+        
+        curr_date=datetime.datetime.now()
         for k,v in dict_of_shows.items():
+            
+            #Additional step to skip some events that passed
+            #but did not got cought beforehand
+            event_time=datetime.datetime.strptime(k[1], '%d/%m/%Y %H:%M')
+            if event_time - curr_date < datetime.timedelta(0):
+                continue
+
             temp_dict={'Title': k[0] , 'Date': k[1]}
             for k_1,v_1 in v.items():
                 temp_dict[k_1]=v_1
@@ -123,12 +151,16 @@ class TicketDBJSON(TicketDataBase):
             legacy_DB_dict[key_tuple]= entry
         return legacy_DB_dict
 
-    def update(self, dict_of_shows: dict[tuple[str,str],dict[str,int]],out_f_name :str)\
+    def update(self, 
+               dict_of_shows: dict[tuple[str,str],dict[str,int]],
+               out_f_name :str,
+               )\
         ->dict[tuple[str,str],bool] | None:
         '''
         Overwrites the parent update 
         adds check if previous state DB exists
         and deciedes what to do 
+        Retunrs the dict of show- available new tickets
         '''
         try:
             ref_DB= self.importDB(out_f_name)

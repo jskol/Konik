@@ -23,7 +23,7 @@ def check_link( date : datetime.datetime, link:str, print_res:bool=True) -> str:
     Funcja sprawdzająca przekierowanie linku do wydarzenia
     '''
     url_main=page_details.base_url
-    date_str="%s-"%date.year + "{:0=2d}-".format(date.month)+"{:0=2d}".format(date.day)
+    date_str=datetime.datetime.strftime(date, "%Y-%m-%d") # using-factory function
     url=url_main+link
     try:
         subpage_request=requests.get(url)

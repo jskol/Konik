@@ -13,10 +13,15 @@ from app.create_ticket_database.data_base import TicketDBJSON,compare_two_dicts_
 DB=TicketDBJSON()
 
 
+from app.create_ticket_database.user_class import User_Email
+#Create list of users
+U1=User_Email('John','Doe','johndoe@gmail.com')
+U2=User_Email('Jane','Doe','janedoe@gmail.com')
+U3=User_Email('Foo', 'Bar','FooBar@gmail.com')
+list_of_subscribers=[U1,U2,U3]
 
-
-@pytest.mark.parametrize("num_of_monts",[1])
-def test_the_notification_functionality(num_of_monts):
+@pytest.mark.parametrize("num_of_monts,list_of_users",[(1,list_of_subscribers)])
+def test_the_notification_functionality(num_of_monts,list_of_users):
     DB_name=f'DB_{num_of_monts}'
     if not os.path.isfile(DB_name+'.json'):
         '''
@@ -68,23 +73,19 @@ def test_the_notification_functionality(num_of_monts):
             with open(f'{DB_alt}.json','w') as f:
                 json.dump(data,f,indent=4)
 
-    
-
     dict1=DB.importDB(DB_name)
-    for DB_alt in DB_alternates:
-        
+    for DB_alt in DB_alternates:        
         dict2=DB.importDB(DB_alt)
         new_ticket_dict=compare_two_dicts_of_shows(dict1,dict2)
-        notification_sent= DB.notify(new_ticket_dict,['foo@gmail.com'])
+        notification_sent= DB.notify(new_ticket_dict,list_of_users)
   
         if notification_sent:
-            print('notification sent')
             assert notification_sent
         else:
-            print('number of tickets has reduced')
             assert not notification_sent
 
 
+# For quick chec-up on the testing procedures
 if __name__=="__main__":
     num_of_monts=1
     with open(f'DB_{num_of_monts}.json','r') as f:
@@ -92,4 +93,4 @@ if __name__=="__main__":
     for entry in data:
         print(entry)    
     print(len(data))
-    test_the_notification_functionality(num_of_monts)
+    test_the_notification_functionality(num_of_monts,list_of_subscribers)

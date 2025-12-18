@@ -21,7 +21,7 @@ list_of_subscribers=[U1,U2,U3]
 @pytest.mark.parametrize("num_of_monts,list_of_users",[(1,list_of_subscribers)])
 def test_the_notification_functionality(num_of_monts,list_of_users):
     DB=TicketDBJSON()
-    DB_name=os.path.join(curr_dir,f'DB_{num_of_monts}')
+    DB_name=os.path.join(curr_dir,f'DB_update_{num_of_monts}')
     create_DB_if_missing(DB,DB_name,num_of_months=1,event_type_in_list=0)
 
     # make the alternate versions with different number of seats

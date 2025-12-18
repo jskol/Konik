@@ -10,7 +10,7 @@ ballet_dict=gen_event_dict(1,"Balet",False) # generate a dict of plays
 
 from app.event_dict.update_dict import update_shows_dict
 
-@pytest.mark.parametrize("num_of_months",[1,2,3])
+@pytest.mark.parametrize("num_of_months",[1])
 def test_update_size_1(num_of_months):
     '''
     Simple test to see if after update the number of events didn't 

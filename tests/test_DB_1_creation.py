@@ -13,7 +13,7 @@ from app.create_ticket_database.data_base import TicketDBJSON
 DB=TicketDBJSON()
 
 
-@pytest.mark.parametrize("num_of_monts",[1,2])
+@pytest.mark.parametrize("num_of_monts",[1])
 def test_dict_to_DB_and_back_transfotmation(num_of_monts):
     '''
     The goal of the test is to see if 

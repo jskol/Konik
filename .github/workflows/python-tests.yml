@@ -47,3 +47,4 @@ jobs:
           path: |
             tests/*.json
             report.xml
+          retention-days: 1

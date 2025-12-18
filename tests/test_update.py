@@ -6,14 +6,9 @@ sys.path.append(os.path.dirname(cur_dir))
 from app.create_ticket_database.data_base import TicketDBJSON, compare_two_dicts_of_shows
 DB=TicketDBJSON()
 
+main_DB_path=os.path.join(cur_dir,'DB_update_1')
 
-test_cases=[
-    (os.path.join(cur_dir,'DB_update_1_less'),True),
-    (os.path.join(cur_dir,'DB_update_1_more'),False),
-    (os.path.join(cur_dir,'DB_update_1_same_but_different'),True)
-]
-
-
+test_cases=[(main_DB_path+x[0],x[1]) for x in [('_less',True),('_more',False),('_same_but_different',True)]]
 
 @pytest.mark.parametrize("ref_DB,has_tickets",test_cases)
 def test_check_for_new_tickets(ref_DB, has_tickets):

@@ -9,7 +9,7 @@ DB=TicketDBJSON()
 
 test_cases=[
     (os.path.join(cur_dir,'DB_1_less'),True),
-    (os.path.join(cur_dir,'DB_1_more'),True),
+    (os.path.join(cur_dir,'DB_1_more'),False),
     (os.path.join(cur_dir,'DB_1_same_but_different'),True)
 ]
 

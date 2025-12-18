@@ -37,4 +37,13 @@ jobs:
 
       - name: Run pytest
         run: |
-          python -m pytest -q
+          python -m pytest -q --junitxml=report.xml
+      
+      - name: Failed test
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: failed-test-setup
+          path: |
+            tests/*.json
+            report.xml

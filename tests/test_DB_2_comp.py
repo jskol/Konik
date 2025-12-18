@@ -23,7 +23,7 @@ list_of_subscribers=[U1,U2,U3]
 
 @pytest.mark.parametrize("num_of_monts,list_of_users",[(1,list_of_subscribers)])
 def test_the_notification_functionality(num_of_monts,list_of_users):
-    DB_name=f'DB_{num_of_monts}'
+    DB_name=os.path.join(curr_dir,f'DB_{num_of_monts}')
     if not os.path.isfile(DB_name+'.json'):
         '''
         If DB is missing-> make it
@@ -34,11 +34,14 @@ def test_the_notification_functionality(num_of_monts,list_of_users):
         DB.exportDB(final_dict,DB_name)
 
     # make the alternate versions with different number of seats
-    DB_alternates=[f'{DB_name}_more',f'{DB_name}_less',f'{DB_name}_same_but_different']
+    DB_alternates=list(map(
+            lambda x: os.path.join(curr_dir,x),
+            [f'{DB_name}_more',f'{DB_name}_less',f'{DB_name}_same_but_different']
+        ))
     diff=[4,-4]
     for it,DB_alt in enumerate(DB_alternates):
-        if not os.path.isfile(os.path.join(curr_dir,DB_alt+'.json')):
-            with open(os.path.join(curr_dir,DB_name+".json"),'r') as f:
+        if not os.path.isfile(DB_alt+'.json'):
+            with open(DB_name+".json",'r') as f:
                 data=json.load(f)
             
             update_made=False
@@ -60,7 +63,7 @@ def test_the_notification_functionality(num_of_monts,list_of_users):
                         sector_2=random.randint(3,len(ev_dict))
                         if sector_2==sector: # percusion to not update the same sector
                             while sector_2 == sector:
-                                sector_2=random.randint(3,len(ev_dict))
+                                sector_2=random.randint(3,len(ev_dict)-1)
                         
                         sec_name_2=ev_keys[sector_2]
                         seat_num_2=ev_dict[sec_name_2]
@@ -71,12 +74,12 @@ def test_the_notification_functionality(num_of_monts,list_of_users):
                     update_made=True
 
 
-            with open(os.path.join(curr_dir,f'{DB_alt}.json'),'w') as f:
+            with open(f'{DB_alt}.json','w') as f:
                 json.dump(data,f,indent=4)
 
-    dict1=DB.importDB(os.path.join(curr_dir,DB_name))
+    dict1=DB.importDB(DB_name)
     for DB_alt in DB_alternates:        
-        dict2=DB.importDB(os.path.join(curr_dir,DB_alt))
+        dict2=DB.importDB(DB_alt)
         new_ticket_dict=compare_two_dicts_of_shows(dict1,dict2)
         notification_sent= DB.notify(new_ticket_dict,list_of_users)
   

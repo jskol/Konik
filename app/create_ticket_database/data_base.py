@@ -24,16 +24,25 @@ def compare_two_dicts_of_shows(dict_of_shows: dict[tuple[str,str],dict[str,int]]
             temp_seating_dict=v
 
         else:# There is non-zero tickets for k-event in the most recent DB
-            if k in dict_of_shows_ref:# both DB have the same show -> compare the total of free seats dict
-                temp_seating_dict={}
-                for sec_DB,sec_DB_ref in zip(v.items(),dict_of_shows_ref[k].items()):
-                    new_seats=0
-                    if sec_DB[1] > sec_DB_ref[1]:
-                        new_seats=sec_DB[1] - sec_DB_ref[1]
-                    temp_seating_dict[sec_DB[0]]=new_seats
-        
-            else: # if k is not int DB_ref bass all tickets there are in DB
-                temp_seating_dict={k:v}      
+            if k in dict_of_shows_ref.keys():# both DB have the same show -> compare the total of free seats dict
+                print("Comparing two entries of ", k)
+                temp_seating_dict={'free seats total':0}
+                new_seats_total=0
+                for sector_DB in list(v.items())[1:]: # trick to jump over the first item
+                    try:
+                        sector_DB_ref=dict_of_shows_ref[k]
+                        new_seats=max(sector_DB[1]-sector_DB_ref[sector_DB[0]],0)
+
+                    except KeyError:
+                        new_seats=sector_DB[1]
+
+                    temp_seating_dict[sector_DB[0]]=new_seats                        
+                    new_seats_total+= new_seats
+                #update the total number of free seats    
+                temp_seating_dict['free seats total']=new_seats_total
+
+            else: # if k is not int DB_ref pass all tickets there are in DB
+                temp_seating_dict=v      
 
         new_ticket_dict[k]=temp_seating_dict
 

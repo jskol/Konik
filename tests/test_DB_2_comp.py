@@ -46,7 +46,7 @@ def test_the_notification_functionality(num_of_monts,list_of_users):
                     sec_name=ev_keys[sector]
                     seat_num=ev_dict[sec_name]
                     
-                    if it !=2:
+                    if it != 2:
                         ev_dict[sec_name]=seat_num+diff[it]
                         free_seats=ev_dict['free seats total']
                         ev_dict['free seats total']=free_seats+diff[it]

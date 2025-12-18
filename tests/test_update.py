@@ -8,16 +8,16 @@ DB=TicketDBJSON()
 
 
 test_cases=[
-    (os.path.join(cur_dir,'DB_1_less'),True),
-    (os.path.join(cur_dir,'DB_1_more'),False),
-    (os.path.join(cur_dir,'DB_1_same_but_different'),True)
+    (os.path.join(cur_dir,'DB_update_1_less'),True),
+    (os.path.join(cur_dir,'DB_update_1_more'),False),
+    (os.path.join(cur_dir,'DB_update_1_same_but_different'),True)
 ]
 
 
 
 @pytest.mark.parametrize("ref_DB,has_tickets",test_cases)
 def test_check_for_new_tickets(ref_DB, has_tickets):
-    read_DB = DB.importDB(os.path.join(cur_dir,'DB_1'))
+    read_DB = DB.importDB(os.path.join(cur_dir,'DB_update_1'))
     read_DB2 = DB.importDB(ref_DB)
     comp_Res=compare_two_dicts_of_shows(read_DB,read_DB2)
    

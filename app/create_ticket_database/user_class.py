@@ -1,4 +1,5 @@
 import os,sys
+import copy
 
 from typing import Any
 from abc import ABC,abstractmethod
@@ -34,6 +35,8 @@ class User(ABC):
         here will be all criterions 
         the user has for the new tickets
         to be interested in them
+        !!! If NO criteria is passed ALL tickets
+        will be returned
         '''
         if list_of_included_sectors:
             self.criteria["sector_include"]=list_of_included_sectors
@@ -45,21 +48,37 @@ class User(ABC):
             self.criteria["price_min"]=price_min
 
     
-    def notify(self,list_of_events:dict[tuple[str,str],dict[str,int]])->dict[tuple[str,str],dict[str,int]]:
-        intersting_events=list_of_events.copy() #make a copy of list of events to work on
-        if self.criteria["sector_exclude"]: # one gave list of sectros to avoid
-            for _,seats in intersting_events.items(): #iterate over all events
-                for remove_sector in self.criteria["sector_exclude"]: #iterate over sectors to remove
-                    seats.pop(remove_sector)
-        
-        if self.criteria["sector_include"]:
-            for _,seats in intersting_events.items(): #iterate over all events
-                for keys in seats.keys():
-                    if keys not in self.criteria["sector_include"] and keys != 'free seats total':
-                        seats.pop(keys)
+    def return_intersting_seats(self,list_of_events:dict[tuple[str,str],dict[str,int]])->dict[tuple[str,str],dict[str,int]]:
                 
-        # Do some testing of this functionality
-        return intersting_events
+        if self.criteria["sector_exclude"]: # one gave list of sectors to avoid
+            interesting_events=copy.deepcopy(list_of_events) #make a DEEP!copy of list of events to work on
+            for _,seats in interesting_events.items(): #iterate over all events
+                for remove_sector in self.criteria["sector_exclude"]: #iterate over sectors to remove
+                    #update number of free seats
+                    seat_num=seats['free seats total']
+                    seats["free seats total"] = seat_num- seats[remove_sector]
+                    #and remove this sector
+                    seats.pop(remove_sector)
+ 
+        elif self.criteria["sector_include"]:
+            interesting_events={} #create a new dict from the ground up
+            for event_key,seats in list_of_events.items(): #iterate over all events
+                new_seat_dict={}
+                new_seat_dict['free seats total']=0
+                for sector in self.criteria["sector_include"]:
+                    if seats[sector]:
+                        new_seat_dict['free seats total'] += seats[sector]
+                        new_seat_dict[sector] = seats[sector]
+
+                interesting_events[event_key]=new_seat_dict
+        else:
+            interesting_events=copy.deepcopy(list_of_events) #return a DEEP copy to work on later 
+        
+        return interesting_events
+    
+    @abstractmethod
+    def notify(self):
+        pass
 
 
 class User_Email(User):
@@ -69,9 +88,14 @@ class User_Email(User):
         self.address=address
     
     def notify(self, list_of_events : dict[tuple[str,str],dict[str,int]])->None:
-        intersting_events=super().notify(list_of_events)
+        intersting_events=self.return_intersting_seats(list_of_events)
         if len(intersting_events)>0:
             print(f'Sending email to {self.name} {self.surname} at {self.address}')
+            for k,v in intersting_events.items():
+                print(f'\t{k[0]} @ {k[1]}')
+                for k2,v2 in v.items():
+                    if v2 >0:
+                        print(f'\t\t {k2}: {v2}')
         pass
 
 

@@ -4,8 +4,5 @@ __pycache__/
 .pytest_cache/
 .venv/
 
-test/web_scaping_pick_up_links.py
-test/webscaping*
-test/first_*
 
-*/DB_*.json
+tests/DB_*.json

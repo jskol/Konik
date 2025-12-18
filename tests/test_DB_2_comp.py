@@ -2,17 +2,14 @@ import pytest,json,random
 import os, sys
 curr_dir=os.path.dirname(os.path.abspath(__file__)) #
 parent_dir = os.path.dirname(curr_dir) #get parent dir
+
+
+sys.path.append(curr_dir)
+from helper_functions import create_DB_if_missing
+
+
 sys.path.append(parent_dir)
-
-from app.main import event_type_list
-from app.event_dict.gen_dict import gen_event_dict
-from app.event_dict.update_dict import update_shows_dict
-from app.event_dict.export_event_dict import export_dict
-
 from app.create_ticket_database.data_base import TicketDBJSON,compare_two_dicts_of_shows
-DB=TicketDBJSON()
-
-
 
 from app.create_ticket_database.user_class import User_Email
 #Create list of users
@@ -23,15 +20,9 @@ list_of_subscribers=[U1,U2,U3]
 
 @pytest.mark.parametrize("num_of_monts,list_of_users",[(1,list_of_subscribers)])
 def test_the_notification_functionality(num_of_monts,list_of_users):
+    DB=TicketDBJSON()
     DB_name=os.path.join(curr_dir,f'DB_{num_of_monts}')
-    if not os.path.isfile(DB_name+'.json'):
-        '''
-        If DB is missing-> make it
-        '''
-        ballet_dict=gen_event_dict(num_of_monts,event_type_list[0],False) # generate a dict of plays
-        update_shows_dict(ballet_dict)
-        final_dict=export_dict(ballet_dict)
-        DB.exportDB(final_dict,DB_name)
+    create_DB_if_missing(DB,DB_name,num_of_months=1,event_type_in_list=0)
 
     # make the alternate versions with different number of seats
     DB_alternates=list(map(

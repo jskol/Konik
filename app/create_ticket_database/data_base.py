@@ -42,6 +42,9 @@ def compare_two_dicts_of_shows(dict_of_shows: dict[tuple[str,str],dict[str,int]]
 ## Here will be export of events to json/yml/xml database
 
 class TicketDataBase(ABC):
+    def __init__(self):
+        self._extension=None
+
     @abstractmethod
     def exportDB(self, dict_of_shows: dict[tuple[str,str],dict[str,int]], out_f_name: str)->None:
         '''
@@ -112,9 +115,18 @@ class TicketDataBase(ABC):
 
 import json
 class TicketDBJSON(TicketDataBase):
-    
-    def exportDB(self, dict_of_shows : dict[tuple[str,str],dict[str,int]], out_f_name: str)->None:
+    def __init__(self):
+        super().__init__()
+        self._extension="json"
 
+
+    def exportDB(self, dict_of_shows : dict[tuple[str,str],dict[str,int]], out_f_name: str)->None:
+        '''
+        Exports a dict of shows with seats
+        into a proper file with extenstion
+        automatically added->do not pass it
+        inot the out_f_name
+        '''
         list_of_dicts=[]
         #reacast to a list of dicts
         # JSON does not allow for tuple keys
@@ -133,11 +145,19 @@ class TicketDBJSON(TicketDataBase):
                 temp_dict[k_1]=v_1
             list_of_dicts.append(temp_dict)
         
-        with open(out_f_name+'.json' , 'w') as f:
+        with open(out_f_name+f'.{self._extension}' , 'w') as f:
             json.dump(list_of_dicts,f,indent=4)
     
     def importDB(self,  f_name: str)-> dict[tuple[str,str],dict[str,int]]:
-        with open(f_name+".json",'r') as f:
+        '''
+        Imports DB from f_name and transforms it
+        back to the dict of tuple of (show name, date)
+        and keys being dicts of seats,
+        The extension is read from the property of the class
+        so do not pass it in f_name
+        '''
+
+        with open(f_name+f'.{self._extension}','r') as f:
             legacy_DB=json.load(f)
         # Recast back to a dictonary wit tuple key
         legacy_DB_dict={}
@@ -169,6 +189,10 @@ class TicketDBJSON(TicketDataBase):
 
 
 class TicketDBXML(TicketDataBase):
+    def __init__(self):
+        super().__init__()
+        self._extension="xml"
+
     pass
 
 

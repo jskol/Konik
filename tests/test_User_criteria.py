@@ -62,6 +62,6 @@ def test_custom_notification_functionality(DB_path_param:str,user:User,ref_val:i
 
 if __name__=="__main__":
         
-    test_custom_notification_functionality('DB_test',U1)
-    test_custom_notification_functionality('DB_test',U2)
-    test_custom_notification_functionality('DB_test',U3)
+    test_custom_notification_functionality('DB_1',U1,0)
+    #test_custom_notification_functionality('DB_test',U2)
+    #test_custom_notification_functionality('DB_test',U3)

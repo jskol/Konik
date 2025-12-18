@@ -53,23 +53,31 @@ class User(ABC):
         if self.criteria["sector_exclude"]: # one gave list of sectors to avoid
             interesting_events=copy.deepcopy(list_of_events) #make a DEEP!copy of list of events to work on
             for _,seats in interesting_events.items(): #iterate over all events
+                #print(seats)
                 for remove_sector in self.criteria["sector_exclude"]: #iterate over sectors to remove
                     #update number of free seats
                     seat_num=seats['free seats total']
-                    seats["free seats total"] = seat_num- seats[remove_sector]
-                    #and remove this sector
-                    seats.pop(remove_sector)
- 
+                    try: # try to find if remove sector is in keys of seats
+                        seats['free seats total'] = seat_num\
+                        - seats[remove_sector]
+                        #and remove this sector
+                        seats.pop(remove_sector)
+                    except KeyError:    
+                        continue
+
         elif self.criteria["sector_include"]:
+            #interesting_events=copy.deepcopy(list_of_events)
             interesting_events={} #create a new dict from the ground up
-            for event_key,seats in list_of_events.items(): #iterate over all events
+            for event_key,seats in interesting_events.items(): #iterate over all events
                 new_seat_dict={}
                 new_seat_dict['free seats total']=0
                 for sector in self.criteria["sector_include"]:
-                    if seats[sector]:
-                        new_seat_dict['free seats total'] += seats[sector]
-                        new_seat_dict[sector] = seats[sector]
-
+                    try: # try if the sector is in the keys of seats
+                        if seats[sector]:
+                            new_seat_dict['free seats total'] += seats[sector]
+                            new_seat_dict[sector] = seats[sector]
+                    except KeyError:
+                        continue
                 interesting_events[event_key]=new_seat_dict
         else:
             interesting_events=copy.deepcopy(list_of_events) #return a DEEP copy to work on later 
@@ -77,7 +85,7 @@ class User(ABC):
         return interesting_events
     
     @abstractmethod
-    def notify(self):
+    def notify(self,list_of_events : dict[tuple[str,str],dict[str,int]])->None:
         pass
 
 
@@ -93,6 +101,7 @@ class User_Email(User):
             print(f'Sending email to {self.name} {self.surname} at {self.address}')
             for k,v in intersting_events.items():
                 print(f'\t{k[0]} @ {k[1]}')
+                #print("Problematic v: ", v)
                 for k2,v2 in v.items():
                     if v2 >0:
                         print(f'\t\t {k2}: {v2}')

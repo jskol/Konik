@@ -71,7 +71,10 @@ def test_the_notification_functionality(num_of_monts,list_of_users):
     dict1=DB.importDB(DB_name)
     for DB_alt in DB_alternates:        
         dict2=DB.importDB(DB_alt)
+        print( "will compare: ", dict1)
+        print( "with: ", dict2)
         new_ticket_dict=compare_two_dicts_of_shows(dict1,dict2)
+        print("Issues with : ", new_ticket_dict)
         notification_sent= DB.notify(new_ticket_dict,list_of_users)
   
         if notification_sent:

@@ -21,7 +21,7 @@ def compare_two_dicts_of_shows(dict_of_shows: dict[tuple[str,str],dict[str,int]]
         #skip unnceessary comparisons if there are no tickets
         # just pass the basic dict (v) with free seast total=0
         if v['free seats total']==0: 
-            temp_seating_dict={k:v}
+            temp_seating_dict=v
 
         else:# There is non-zero tickets for k-event in the most recent DB
             if k in dict_of_shows_ref:# both DB have the same show -> compare the total of free seats dict
@@ -36,6 +36,7 @@ def compare_two_dicts_of_shows(dict_of_shows: dict[tuple[str,str],dict[str,int]]
                 temp_seating_dict={k:v}      
 
         new_ticket_dict[k]=temp_seating_dict
+
     return new_ticket_dict
 
 

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <title>Strona z listą wolnych biletow</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        .event-box { border: 2px solid #009688; display: inline-block; padding: 20px; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+
+<h1>{{event_type_name}} w najbliższym czasie </h1>
+<p><small> Ostatnie aktualizacja {{last_modified}} </small></p>
+
+{% for event,seats in dict_of_events.items() %}
+    <div class="event-box">
+    {% if seats.values() | first >0 %}
+        
+        <p><b>{{event.0}} @ {{event.1}}</b></p>
+        {%for sector_name,num_of_seats in seats.items() %}
+            {% if num_of_seats >0%}
+                <p><p> {{sector_name}} : {{num_of_seats}}</p></p>
+            {%endif%}
+        {%endfor%}
+    
+    {%else%}
+    <p><b> Brak biletów na {{event.0}} @ {{event.1}}</b></p>
+    {%endif%}
+</div><p></p>
+{%endfor%}
+
+</body>
+</html>

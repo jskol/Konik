@@ -1,23 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">    
     <meta charset="UTF-8">
     <title>Biletomania</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-        .welcome-box { border: 2px solid #009688; display: inline-block; padding: 10px; border-radius: 10px; }
-        .custom-btn {width: 25%; padding: 20px;}
-        img {width: 100%;object-fit: contain; /* Obrazek zachowuje proporcje i nie rozciąga się */
-        }
+        body { font-family: 'Montserrat', sans-serif; text-align: center; margin-top: 50px;background-color: #FFFFF0; }
+        .welcome-box { display: inline-block; padding: 10px;}
+        .btn-with-img { 
+                        position: relative;
+                        width: 25%; padding: 0px; overflow: hidden;
+                        border-radius: 5%; cursor: pointer;
+                        border:None;/* 2px solid black; */
+                        box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: transform 0.2s;
+                        /*color:#000202;*/
+
+                        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+                        background-color: #EDEADE;
+                        font-size: medium;
+                        font-family: 'Montserrat', sans-serif;
+                        /*backdrop-filter: blur(5px);*/
+
+                    }
+        .btn-with-img:hover{transform: scale(1.05); z-index: 10; position: relative;}
+        .btn-with-img img {width: 100%; object-fit: cover; display: block;}
+ 
     </style>
 </head>
 <body>
     <div class="welcome-box">
-        <h1>Cześć!</h1>
-        <p>Który rodzaj wydarzenia Cię interesuje ?</p>
+        <h1>Który rodzaj wydarzenia Cię interesuje ?</h1>
         <form action="/pick_event" method="post">
         {% for event in event_list %}
-             <button class="custom-btn" name="event_num" value="{{ loop.index0 }}">
+             <button class="btn-with-img" name="event_num" value="{{ loop.index0 }}">
                 <img src="{{url_for('static',path='/images/'+event+'.jpg')}}"  alt="{{event}}">
                 <p>{{event}}</p>
             </button>

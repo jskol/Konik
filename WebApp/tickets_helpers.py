@@ -83,7 +83,7 @@ def create_calendar(event_dict:dict[tuple[str,str],dict[str,int]])-> dict[str,st
     temp_month=current_date.month
     
     while temp_year <= last_event.year:
-        max_month=13 if temp_year < last_event.year else last_event.month 
+        max_month=13 if temp_year < last_event.year else last_event.month+1 
         for month in range(temp_month, max_month):
             month_name = calendar.month_name[month]
             month_days =cal.monthdayscalendar(temp_year, month)
@@ -108,6 +108,7 @@ def create_calendar(event_dict:dict[tuple[str,str],dict[str,int]])-> dict[str,st
             full_year.append({
                 "year": temp_year,
                 "name": month_name,
+                "number": month,
                 "weeks": new_month_days
             })
         temp_year+=1

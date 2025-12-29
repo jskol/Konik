@@ -17,10 +17,10 @@
             flex-shrink: 0;
             scroll-snap-align: center; 
         }
-        .event-box:hover{transform: scale(1.1);}
+        .event-box:hover{transform: scale(1.2);}
         
         .event-slider{
-            width: 50%;             /* Szerokość widocznego obszaru */
+            width: 60%;             /* Szerokość widocznego obszaru */
             overflow-x: auto;        /* Włącza suwak poziomowy, gdy zawartość wystaje */
             padding: 20px 0;         /* Miejsce na cienie (box-shadow), żeby ich nie przycięło */
             scroll-behavior: smooth;    /* Płynne przewijanie */
@@ -30,6 +30,7 @@
             scrollbar-width: none;
         }
         .event-slider-wrapper {
+            margin: 0 auto;
             display: flex;           /* Ustawia boxy obok siebie */
             gap: 20px;               /* Odstępy między boxami */
             padding: 0 10px;
@@ -39,7 +40,7 @@
         /* Dodaj "fancy" guzik do przewijania */
         .carousel-wrapper {
             position: relative; /* Kotwica dla przycisków nav-btn */
-            width: 51%;
+            width: 61%;
             margin: 0 auto;
             display: flex;
             align-items: center;
@@ -87,6 +88,7 @@
             transition: background 0.2s;
         }
         .day:hover{transform: scale(1.15);}
+
         .day_with_event {
             font-size: 0.9rem;
             padding: 5px;
@@ -118,7 +120,7 @@
     <p><small> Ostatnia aktualizacja {{last_modified}} </small></p>
     
     <p><p></p></p>
-    
+    <!-- Calendar of events -->
     <div class="event-calendar">
         {% for month in calendar_dict %}
         <div class="event-box">
@@ -138,9 +140,15 @@
                         <div class="empty"></div>
                     {% else %}
                         {%if day[1]%}
-                            <div class="day_with_event">{{ day[0] }}</div>
+                            {% set day_temp= "%02d" | format(day[0]) %}
+                            {% set month_temp= "%02d" | format(month.number) %}
+                            {% set year_temp= "%04d" | format(month.year) %}                            
+                            {% set iterator = day_temp~"/"~month_temp~"/"~year_temp %}
+                            <div class="day_with_event" onclick="showEvent('{{iterator}}')">
+                                {{ day[0] }}
+                            </div>
                         {% else %}
-                            <div class="day">{{ day[0] }}</div>
+                            <div class="day" > {{ day[0] }}</div>
                         {% endif %}
                     {% endif %}
                 {% endfor %}
@@ -152,31 +160,37 @@
     <p><p></p></p>
 
 
-
+    <!-- Carousel with events -->
     <div class="carousel-wrapper">
         <button class="nav-btn prev" onclick="scrollSlider(-300)">&#10094;</button>
         <div class="event-slider" id="EventSlider">
             <div class="event-slider-wrapper">
             {% for event,seats in dict_of_events.items() %}
-                <div class="event-box">
-                {% if seats.values() | first >0 %}
-                    
-                    <p><b>{{event.0}} @ {{event.1}}</b></p>
-                    {%for sector_name,num_of_seats in seats.items() %}
-                        {% if num_of_seats >0%}
-                            <p><p> {{sector_name}} : {{num_of_seats}}</p></p>
-                        {%endif%}
-                    {%endfor%}
                 
+                {% if seats.values() | first >0 %}
+                    {%set date=event[1].split()[0] %}
+                    <div class="event-box" id="event-{{ date }}">
+                        <p><b>{{event.0}} @ {{event.1}}</b></p>
+                        {%for sector_name,num_of_seats in seats.items() %}
+                            {% if num_of_seats >0%}
+                                <p><p> {{sector_name}} : {{num_of_seats}}</p></p>
+                            {%endif%}
+                        {%endfor%}
+                    </div>
+                   
                 {%else%}
-                <p><b> Brak biletów na {{event.0}} @ {{event.1}}</b></p>
+                    <div class="event-box">
+                        <p><b> Brak biletów na {{event.0}} @ {{event.1}}</b></p>
+                    </div>
                 {%endif%}
-                </div>
+                
             {%endfor%}
             </div>
         </div>
         <button type="button" class="nav-btn next" onclick="scrollSlider(300)">&#10095;</button>
     </div>
+   
+    <!-- Back to the homepage -->
     <a href="{{ url_for('welcome_page') }}" class="back-home">
          Powrót do strony głównej
     </a>
@@ -191,7 +205,25 @@
             behavior: 'smooth' /* Dzięki temu suwak nie "skacze", tylko płynie */
             });
         }
+
+        function showEvent(index) {
+            // 1. Znajdź element w karuzeli po jego ID
+            const element = document.getElementById('event-' + index);
+            
+            if (element) {
+                // 2. Przewiń płynnie do tego elementu
+                element.scrollIntoView({
+                    behavior: 'smooth', // Płynny ruch
+                    block: 'center',   // Nie przewijaj strony góra-dół
+                    inline: 'center'    // Wyśrodkuj element w poziomie wewnątrz suwaka
+                });
+
+            }
+        }
+
     </script>
+
+
 
 </body>
 </html>

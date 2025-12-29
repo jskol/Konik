@@ -64,6 +64,50 @@
         .nav-btn:hover {
             background: #FFFFF0; /* Pełne Ivory */
         }
+
+        /* Bebechy kalendarza */
+        .event-calendar{
+            margin: 0 auto;
+            width: 50%;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr; /*3 miesiące w rzędzie*/
+        }
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr); /* 7 równych kolumn */
+            gap: 5px;
+            width: 100%;
+        }
+        .day {
+            font-size: 0.9rem;
+            padding: 5px;
+            background: #FFFFF0; /* Ivory */
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .day:hover{transform: scale(1.15);}
+        .day_with_event {
+            font-size: 0.9rem;
+            padding: 5px;
+            background: #FFFFF0; /* Ivory */
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+            color:red;
+        }
+        .day_with_event:hover{transform: scale(1.15);}
+
+        .day_empty {
+            font-size: 0.9rem;
+            padding: 5px;
+            background: #fffff010; /* Ivory */
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        
     </style>
 
 </head>
@@ -72,9 +116,45 @@
 
     <h1>{{event_type_name}} w najbliższym czasie </h1>
     <p><small> Ostatnia aktualizacja {{last_modified}} </small></p>
+    
+    <p><p></p></p>
+    
+    <div class="event-calendar">
+        {% for month in calendar_dict %}
+        <div class="event-box">
+         <h3>{{month.name}} {{month.year}}</h3>
+         <div class="days-grid">
+            <div class="day_empty">Pn</div>
+            <div class="day_empty">Wt</div>
+            <div class="day_empty">Śr</div>
+            <div class="day_empty">Czw</div>
+            <div class="day_empty">Pt</div>
+            <div class="day_empty">Sob</div>
+            <div class="day_empty">Nie</div>
+
+            {% for week in month.weeks %}
+                {% for day in week %}
+                    {% if day[0] == 0 %}
+                        <div class="empty"></div>
+                    {% else %}
+                        {%if day[1]%}
+                            <div class="day_with_event">{{ day[0] }}</div>
+                        {% else %}
+                            <div class="day">{{ day[0] }}</div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+         </div>
+        </div>
+        {% endfor %}
+    </div>
+    <p><p></p></p>
+
+
+
     <div class="carousel-wrapper">
         <button class="nav-btn prev" onclick="scrollSlider(-300)">&#10094;</button>
-
         <div class="event-slider" id="EventSlider">
             <div class="event-slider-wrapper">
             {% for event,seats in dict_of_events.items() %}
@@ -97,6 +177,10 @@
         </div>
         <button type="button" class="nav-btn next" onclick="scrollSlider(300)">&#10095;</button>
     </div>
+    <a href="{{ url_for('welcome_page') }}" class="back-home">
+         Powrót do strony głównej
+    </a>
+
 
 
     <script> /* fragment z javy do przewijania*/

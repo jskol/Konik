@@ -46,3 +46,73 @@ def read_DB(
     event_dict=DB.importDB(DB_location)
     return event_dict, date_str
     
+import calendar
+import datetime
+
+def create_calendar(event_dict:dict[tuple[str,str],dict[str,int]])-> dict[str,str|int]:
+    ''''
+    Function creating a calendar from now till the final month in the database
+    '''
+    #get calendar
+    cal = calendar.Calendar(firstweekday=0) # Week starts from monday
+    
+    # find current date and the date of 
+    # the last show in the ticket DB
+    # plus create a list of dates for
+    # which there are tickets left
+    
+    current_date=datetime.datetime.now()
+    last_event=current_date
+    list_of_dates=[]
+    for event in event_dict.keys():
+        event_date=datetime.datetime.strptime(event[1],'%d/%m/%Y %H:%M')
+        if any(event_dict[event].values()):
+            list_of_dates.append(
+                datetime.datetime(
+                    event_date.year,
+                    event_date.month, 
+                    event_date.day
+                    )
+                )
+        if event_date> last_event:
+            last_event=event_date
+    
+
+    full_year = []
+    temp_year=current_date.year
+    temp_month=current_date.month
+    
+    while temp_year <= last_event.year:
+        max_month=13 if temp_year < last_event.year else last_event.month 
+        for month in range(temp_month, max_month):
+            month_name = calendar.month_name[month]
+            month_days =cal.monthdayscalendar(temp_year, month)
+            # above creates a list of weeks with either 0 or the day number
+            # depending on if it fits the mon-sun scheme
+            #below we extend values of this this list
+            # into tuples with the value and if this date is 
+            # in the list of dates with an event with tickets
+            
+            new_month_days=[]
+            for week in month_days:
+                temp_week=[]
+                for day in week:
+                    if day ==0:
+                        temp_week.append((0, False))
+                    else:
+                        temp_date=datetime.datetime.strptime(f'{day} {month} {temp_year}','%d %m %Y')
+                        temp_week.append((day,bool(list_of_dates.count(temp_date))))
+                new_month_days.append(temp_week)               
+            
+            
+            full_year.append({
+                "year": temp_year,
+                "name": month_name,
+                "weeks": new_month_days
+            })
+        temp_year+=1
+        temp_month=1
+        
+    return full_year
+        
+    

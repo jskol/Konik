@@ -75,9 +75,11 @@ async def handle_event_pick(request:Request,
 
 
 ### Ticketing subpage
-from tickets_helpers import fix_name,read_DB
+from tickets_helpers import fix_name,read_DB,create_calendar
 # Import DataBase format
 from app.create_ticket_database.data_base import TicketDBJSON
+# Functionality for hangling the calndar option
+
 
 @webapp.get("/tickets/{event_num}",response_class=HTMLResponse)
 async def print_tickets(request: Request,
@@ -86,7 +88,7 @@ async def print_tickets(request: Request,
     #Read the database
     DB=TicketDBJSON()
     event_dict,date_str=read_DB(DB,event_num)
-
+    calendar_dict=create_calendar(event_dict)
     # Create a dict to pass to the webpage
     new_event_dict={}
     for event,seats in list(event_dict.items()):
@@ -94,11 +96,14 @@ async def print_tickets(request: Request,
             temp_dict={ 'wolne miejsca' if k=='free seats total' else k : v for k,v in seats.items() }
             new_event_dict[event]=temp_dict
     
+
+    
     return templates.TemplateResponse("tickets.html",
                                       {"request": request,
                                        "event_type_name": event_name_str,
                                         "dict_of_events":new_event_dict,
-                                        "last_modified":  date_str
+                                        "last_modified":  date_str,
+                                        "calendar_dict": calendar_dict
                                        })
 
 

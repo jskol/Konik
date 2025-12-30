@@ -6,3 +6,4 @@ __pycache__/
 
 
 tests/DB_*.json
+Ticket_DB/*.json

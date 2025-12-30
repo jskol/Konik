@@ -2,7 +2,7 @@
     {
         "Title": " Peer Gynt ",
         "Date": "01/03/2026 18:00",
-        "free seats total": 2,
+        "free seats total": 1,
         "1. Plan gowny": 0,
         "Parter": 0,
         "Amfiteatr": 0,
@@ -14,7 +14,7 @@
         "Balkon II - prawa strona": 0,
         "Balkon III - lewa strona": 0,
         "Balkon III - srodek": 0,
-        "Balkon III - prawa strona": 1
+        "Balkon III - prawa strona": 0
     },
     {
         "Title": " Peer Gynt ",
@@ -64,9 +64,9 @@
     {
         "Title": " Bajadera ",
         "Date": "25/06/2026 19:00",
-        "free seats total": 408,
+        "free seats total": 401,
         "1. Plan gowny": 0,
-        "Parter": 15,
+        "Parter": 8,
         "Amfiteatr": 158,
         "Balkon I - lewa strona": 15,
         "Balkon I - srodek": 65,

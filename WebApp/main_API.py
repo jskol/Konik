@@ -16,7 +16,7 @@ def create_lifespan( run_background_process :bool ):
             print("starting the DB update...")
             DB=TicketDBJSON()
             executor = ThreadPoolExecutor(max_workers=2)
-            bg_task = asyncio.create_task(do_DB_update(DB,12,3600)) # This will run in the background 
+            bg_task = asyncio.create_task(do_DB_update(DB,12,4*3600)) # This will run in the background 
             # In future also notification option will
             # be added to this part 
         else:

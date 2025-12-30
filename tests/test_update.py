@@ -22,6 +22,19 @@ def test_check_for_new_tickets(ref_DB, has_tickets):
     print(list(new_tickets.keys()))
     assert bool(len(new_tickets)>0) == has_tickets
 
+from app.create_ticket_database.extract_new_tickets import extract_new_tickets
+
+@pytest.mark.parametrize("ref_DB,has_tickets",test_cases)
+def test_compare_check_for_new_tickets_with_extract(ref_DB, has_tickets):
+    read_DB = DB.importDB(main_DB_path)
+    read_DB2 = DB.importDB(ref_DB)
+    comp_Res=compare_two_dicts_of_shows(read_DB,read_DB2)
+    new_tickets={ k:v  for k,v in comp_Res.items() if any(v.values())}
+
+    new_tickets_V2=extract_new_tickets(DB,main_DB_path,ref_DB)
+
+    for old,new in zip(new_tickets.items(),new_tickets_V2.items()):
+        assert bool(old[0]==new[0])== has_tickets
 
 
 if __name__=="__main__":

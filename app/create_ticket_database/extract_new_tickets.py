@@ -19,7 +19,7 @@ def  extract_new_tickets(DB_type: TicketDataBase,
     else:
         read_DB = DB_type.importDB(new_DB_file)
         try:
-            read_DB2 = DB_type.importDB(os.path.join(cur_dir,))
+            read_DB2 = DB_type.importDB(ref_DB_file)
             comp_Res=compare_two_dicts_of_shows(read_DB,read_DB2)    
         except FileNotFoundError:
             comp_Res=read_DB

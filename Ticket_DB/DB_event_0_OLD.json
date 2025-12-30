@@ -2,7 +2,7 @@
     {
         "Title": " Peer Gynt ",
         "Date": "01/03/2026 18:00",
-        "free seats total": 2,
+        "free seats total": 1,
         "1. Plan gowny": 0,
         "Parter": 0,
         "Amfiteatr": 0,
@@ -14,7 +14,7 @@
         "Balkon II - prawa strona": 0,
         "Balkon III - lewa strona": 0,
         "Balkon III - srodek": 0,
-        "Balkon III - prawa strona": 1
+        "Balkon III - prawa strona": 0
     },
     {
         "Title": " Peer Gynt ",
@@ -64,12 +64,12 @@
     {
         "Title": " Bajadera ",
         "Date": "25/06/2026 19:00",
-        "free seats total": 402,
+        "free seats total": 401,
         "1. Plan gowny": 0,
-        "Parter": 10,
+        "Parter": 8,
         "Amfiteatr": 158,
         "Balkon I - lewa strona": 15,
-        "Balkon I - srodek": 64,
+        "Balkon I - srodek": 65,
         "Balkon I - prawa strona": 15,
         "Balkon II - lewa strona": 5,
         "Balkon II - srodek": 105,
@@ -225,16 +225,16 @@
     {
         "Title": " Androidy ",
         "Date": "14/05/2026 12:00",
-        "free seats total": 9,
+        "free seats total": 11,
         "1. Plan gowny": 0,
         "Parter": 0,
         "Amfiteatr": 0,
         "Balkon I - lewa strona": 0,
         "Balkon I - srodek": 0,
         "Balkon I - prawa strona": 0,
-        "Balkon II - lewa strona": 3,
+        "Balkon II - lewa strona": 4,
         "Balkon II - srodek": 0,
-        "Balkon II - prawa strona": 0,
+        "Balkon II - prawa strona": 1,
         "Balkon III - lewa strona": 2,
         "Balkon III - srodek": 2,
         "Balkon III - prawa strona": 2
@@ -242,16 +242,16 @@
     {
         "Title": " Androidy ",
         "Date": "14/05/2026 19:00",
-        "free seats total": 9,
+        "free seats total": 11,
         "1. Plan gowny": 0,
         "Parter": 0,
         "Amfiteatr": 0,
         "Balkon I - lewa strona": 0,
         "Balkon I - srodek": 0,
         "Balkon I - prawa strona": 0,
-        "Balkon II - lewa strona": 3,
+        "Balkon II - lewa strona": 4,
         "Balkon II - srodek": 0,
-        "Balkon II - prawa strona": 0,
+        "Balkon II - prawa strona": 1,
         "Balkon III - lewa strona": 2,
         "Balkon III - srodek": 2,
         "Balkon III - prawa strona": 2

@@ -35,17 +35,22 @@ def create_lifespan( run_background_process :bool ):
 webapp_lifespan=create_lifespan(True)
 webapp=FastAPI(lifespan=webapp_lifespan)
 
+import os,sys
+curr_dir=os.path.dirname(os.path.abspath(__file__))
 
 # Mount location of static data like pictures etc. ...
 from fastapi.staticfiles import StaticFiles
-webapp.mount("/static",StaticFiles(directory="static"),name="static")
+webapp.mount("/static",
+             StaticFiles(directory=os.path.join(curr_dir,"static")),
+             name="static"
+             )
 
 #Mount the templates for subpages 
 # All handled by Jinja2
-import os,sys
-curr_dir=os.path.dirname(os.path.abspath(__file__))
 from fastapi.templating import Jinja2Templates
-templates=Jinja2Templates(directory=os.path.join(curr_dir,"page_templates"))
+templates=Jinja2Templates(
+    directory=os.path.join(curr_dir,"page_templates")
+    )
 
 
 ### HOME PAGE #####

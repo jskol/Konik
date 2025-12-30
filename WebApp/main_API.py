@@ -32,8 +32,19 @@ def create_lifespan( run_background_process :bool ):
     return lifespan
     
 #Start the API
-webapp_lifespan=create_lifespan(False)
+webapp_lifespan=create_lifespan(True)
 webapp=FastAPI(lifespan=webapp_lifespan)
+
+# Necessary to enforce HTTPS in headers
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
+class HTTPSRedirectMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request, call_next):
+        # To mówi FastAPI: "Traktuj wszystkie zapytania jak HTTPS"
+        request.scope["scheme"] = "https"
+        response = await call_next(request)
+        return response
+webapp.add_middleware(HTTPSRedirectMiddleware)
 
 import os,sys
 curr_dir=os.path.dirname(os.path.abspath(__file__))

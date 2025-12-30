@@ -4,6 +4,3 @@ __pycache__/
 .pytest_cache/
 .venv/
 
-
-tests/DB_*.json
-Ticket_DB/*.json

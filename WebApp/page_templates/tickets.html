@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">    
     <meta charset="UTF-8">
     <title>Strona z listą wolnych biletow</title>
@@ -69,9 +70,11 @@
         /* Bebechy kalendarza */
         .event-calendar{
             margin: 0 auto;
-            width: 50%;
+            width: 80%;
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr; /*3 miesiące w rzędzie*/
+            place-items: center;
+            /*grid-template-columns: 1fr 1fr 1fr; /*3 miesiące w rzędzie*/
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         }
         .days-grid {
             display: grid;
@@ -83,7 +86,7 @@
             font-size: 0.9rem;
             padding: 5px;
             background: #FFFFF0; /* Ivory */
-            border-radius: 4px;
+            border-radius: 4px; 
             cursor: pointer;
             transition: background 0.2s;
         }
@@ -107,6 +110,13 @@
             border-radius: 4px;
             cursor: pointer;
             transition: background 0.2s;
+        }
+        @media (max-width: 768px) {
+            .event-slider{ width: 90%; }
+            .carousel-wrapper { width: 91%;}
+            .event-box{font-size: 0.9rem;}
+            .prev{left: 2%;}
+            .next{right: 2%;}
         }
         
         
@@ -214,7 +224,7 @@
                 // 2. Przewiń płynnie do tego elementu
                 element.scrollIntoView({
                     behavior: 'smooth', // Płynny ruch
-                    block: 'center',   // Nie przewijaj strony góra-dół
+                    block: 'start',   // Nie przewijaj strony góra-dół
                     inline: 'center'    // Wyśrodkuj element w poziomie wewnątrz suwaka
                 });
 

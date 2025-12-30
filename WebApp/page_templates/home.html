@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">    
     <meta charset="UTF-8">
     <title>Biletomania</title>
@@ -24,7 +25,13 @@
                     }
         .btn-with-img:hover{transform: scale(1.05); z-index: 10; position: relative;}
         .btn-with-img img {width: 100%; object-fit: cover; display: block;}
- 
+        /* For phones */
+        @media (max-width: 768px) {
+            .btn-with-img {
+                width: 45%;
+            }
+        
+        }
     </style>
 </head>
 <body>

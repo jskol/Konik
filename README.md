@@ -1,4 +1,4 @@
-# WebScraping - Teat Wielki
+# Teatr Wielki problemy małe
 
 Soft dla wszystkich sfrustrowanych działaniem stony Teatru wielkiego. Wybierając typ wydarzania i zakres 
 zainteresowania tymi wydarzeniami otrzymujemy stan biletów w tym okresie. 

@@ -11,4 +11,4 @@ COPY . .
 WORKDIR /app/WebApp
 
 # Startujemy serwer uvicorn na porcie 7860
-CMD ["uvicorn", "main_API:webapp    ", "--host", "0.0.0.0", "--port", "7860"]
+CMD ["uvicorn", "main_API:webapp", "--host", "0.0.0.0", "--port", "7860"]

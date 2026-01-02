@@ -6,6 +6,8 @@ from ticket_DB_periodic_update.DB_periodic_update import do_DB_update # one of t
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request,Form
 from concurrent.futures import ThreadPoolExecutor
+ 
+from HF_download import upload_to_hf
 
 def create_lifespan( run_background_process :bool ):
     @asynccontextmanager
@@ -17,6 +19,7 @@ def create_lifespan( run_background_process :bool ):
             DB=TicketDBJSON()
             executor = ThreadPoolExecutor(max_workers=2)
             bg_task = asyncio.create_task(do_DB_update(DB,12,4*3600)) # This will run in the background 
+            
             # In future also notification option will
             # be added to this part 
         else:

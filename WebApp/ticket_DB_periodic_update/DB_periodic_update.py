@@ -3,7 +3,7 @@ import os,sys
 curr_dir=os.path.dirname(os.path.abspath(__file__))
 parent_dir=os.path.dirname(curr_dir)
 sys.path.append(os.path.dirname(parent_dir))
-
+sys.path.append(parent_dir)
 #Update bazy danych w tle co 24h
 from app.event_dict.gen_dict import gen_event_dict
 from app.event_dict.update_dict import update_shows_dict
@@ -12,7 +12,7 @@ from app.create_ticket_database.data_base import TicketDataBase
 from app.main import event_type_list
 import datetime
 import asyncio,shutil
-
+from HF_download import upload_to_hf
 async def do_DB_update(
     DB_type: TicketDataBase,
     months_in_advance:int,
@@ -57,7 +57,8 @@ async def do_DB_update(
                     )
                 except FileNotFoundError:
                     print(f'Nie powiodło się tworzenie {src_copy}')
-            
+                    
+                #upload_to_hf(src)
             # Do a two step swap of the DB
             DB_type.exportDB(final_dict,DB_loc)
         print("Biletowa baza danych jest aktualna")

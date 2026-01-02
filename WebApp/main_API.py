@@ -32,8 +32,9 @@ def create_lifespan( run_background_process :bool ):
     return lifespan
     
 #Start the API
-webapp_lifespan=create_lifespan(True)
+webapp_lifespan=create_lifespan(False)
 webapp=FastAPI(lifespan=webapp_lifespan)
+
 '''
 # Necessary to enforce HTTPS in headers
 from fastapi.middleware.trustedhost import TrustedHostMiddleware

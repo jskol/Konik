@@ -10,6 +10,7 @@ from app.event_dict.update_dict import update_shows_dict
 from app.event_dict.export_event_dict import export_dict
 from app.create_ticket_database.data_base import TicketDataBase
 from app.main import event_type_list
+import datetime
 import asyncio,shutil
 
 async def do_DB_update(
@@ -26,6 +27,9 @@ async def do_DB_update(
     curr_dir=os.path.dirname(os.path.abspath(__file__))
     root_dir=os.path.dirname(os.path.dirname(curr_dir))
     while True:
+        curr_date=datetime.datetime.now()
+        date_str=curr_date.strftime("%d/%m/%Y %H:%M:%S")
+        print(f'Ruszam z aktualizacją {date_str}')
         for event_it, event_type in enumerate(event_type_list):
             DB_loc=os.path.join(root_dir,'Ticket_DB',f'DB_event_{event_it}')
             # generate a dict of plays 12 months in advance
@@ -43,7 +47,9 @@ async def do_DB_update(
             src=DB_loc+f'.{DB_type._extension}'
             src_copy=DB_loc+f'_OLD.{DB_type._extension}'
             if os.path.exists(src):
-                print(f"Robię kopię DB {src}->{src_copy}")
+                curr_date=datetime.datetime.now()
+                date_str=curr_date.strftime("%d/%m/%Y %H:%M:%S")
+                print(f"Robię kopię DB {src}->{src_copy} o {date_str}")
                 try:
                     shutil.copyfile(
                         src,

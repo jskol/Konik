@@ -35,23 +35,31 @@ def create_lifespan( run_background_process :bool ):
     return lifespan
     
 #Start the API
-webapp_lifespan=create_lifespan(False)
+
+import os
+# Use getenv to skip background updates
+# For docker runs the ENVs are set to true
+# while doing local_runs
+background_run=bool(int(os.getenv("RUN_IN_BACKGROUND")))
+webapp_lifespan=create_lifespan(background_run)
 webapp=FastAPI(lifespan=webapp_lifespan)
 
-'''
-# Necessary to enforce HTTPS in headers
-from fastapi.middleware.trustedhost import TrustedHostMiddleware
-from starlette.middleware.base import BaseHTTPMiddleware
-class HTTPSRedirectMiddleware(BaseHTTPMiddleware):
-    async def dispatch(self, request, call_next):
-        # To mówi FastAPI: "Traktuj wszystkie zapytania jak HTTPS"
-        request.scope["scheme"] = "https"
-        response = await call_next(request)
-        return response
-webapp.add_middleware(HTTPSRedirectMiddleware)
-'''
 
-import os,sys
+# Necessary to enforce HTTPS in headers
+hande_https=bool(int(os.getenv("HANDLE_HTTPS")))
+if hande_https:
+    from fastapi.middleware.trustedhost import TrustedHostMiddleware
+    from starlette.middleware.base import BaseHTTPMiddleware
+    class HTTPSRedirectMiddleware(BaseHTTPMiddleware):
+        async def dispatch(self, request, call_next):
+            # To mówi FastAPI: "Traktuj wszystkie zapytania jak HTTPS"
+            request.scope["scheme"] = "https"
+            response = await call_next(request)
+            return response
+    webapp.add_middleware(HTTPSRedirectMiddleware)
+
+
+import sys
 curr_dir=os.path.dirname(os.path.abspath(__file__))
 
 # Mount location of static data like pictures etc. ...
@@ -100,8 +108,6 @@ from tickets_helpers import fix_name,read_DB,create_calendar
 # Import DataBase format
 from app.create_ticket_database.data_base import TicketDBJSON
 # Functionality for hangling the calndar option
-
-
 @webapp.get("/tickets/{event_num}",response_class=HTMLResponse)
 async def print_tickets(request: Request,
                        event_num:int):

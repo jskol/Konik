@@ -8,7 +8,6 @@ def upload_to_hf(local_file):
         return
 
     HF_api = HfApi()
-    # Tutaj wpisz swoją nazwę użytkownika i nazwę Space
     repo_id = "jskol87/Konik" 
     
     print(f"Wysyłam {local_file} do {repo_id}...")

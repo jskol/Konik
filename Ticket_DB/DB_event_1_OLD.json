@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [
     {
         "Title": " Chorus Opera ",
@@ -262,3 +263,8 @@
         "free seats total": 0
     }
 ]
+=======
+version https://git-lfs.github.com/spec/v1
+oid sha256:a7147d0a62cf6ea4198bba71d2e031ea9b66eaff848a54b3433d8db99fc8a5e8
+size 10234
+>>>>>>> 1b07266 (Added handling of .env for uvicorn to merge huggingface and git)

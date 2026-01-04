@@ -28,6 +28,7 @@ if handle_https:
 
 
 import sys
+curr_dir=os.path.dirname(os.path.abspath(__file__))
 webapp_parent_dir=os.path.dirname(os.path.abspath(__file__))
 
 # Mount location of static data like pictures etc. ...
@@ -69,6 +70,38 @@ async def handle_event_pick(request:Request,
     url_to_pass=request.url_for("print_tickets",event_num=event_num)
     return RedirectResponse(url=url_to_pass, status_code=303)
 
-# Get Subpage with tickets
-from API_modules.ticket_subpage import router #here is the print_tickets function defined
-webapp.include_router(router)
+
+### Ticketing subpage
+from tickets_helpers import fix_name,read_DB,create_calendar
+# Import DataBase format
+from app.create_ticket_database.data_base import TicketDBJSON
+# Functionality for hangling the calndar option
+
+
+@webapp.get("/tickets/{event_num}",response_class=HTMLResponse)
+async def print_tickets(request: Request,
+                       event_num:int):
+    event_name_str=fix_name(event_type_list[event_num])
+    #Read the database
+    DB=TicketDBJSON()
+    event_dict,date_str=read_DB(DB,event_num)
+    calendar_dict=create_calendar(event_dict)
+    # Create a dict to pass to the webpage
+    new_event_dict={}
+    for event,seats in list(event_dict.items()):
+        if any(seats.values()):
+            temp_dict={ 'wolne miejsca' if k=='free seats total' else k : v for k,v in seats.items() }
+            new_event_dict[event]=temp_dict
+    
+
+    
+    return templates.TemplateResponse("tickets.html",
+                                      {"request": request,
+                                       "event_type_name": event_name_str,
+                                        "dict_of_events":new_event_dict,
+                                        "last_modified":  date_str,
+                                        "calendar_dict": calendar_dict
+                                       })
+
+
+    

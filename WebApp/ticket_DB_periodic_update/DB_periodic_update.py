@@ -16,7 +16,7 @@ from app.main import event_type_list
 import datetime
 import datetime
 import asyncio,shutil
-
+from HF_download import upload_to_hf
 async def do_DB_update(
     DB_type: TicketDataBase,
     months_in_advance:int,
@@ -61,9 +61,13 @@ async def do_DB_update(
                     )
                 except FileNotFoundError:
                     print(f'Nie powiodło się tworzenie {src_copy}')
-            
+                    
+                #upload_to_hf(src)
             # Do a two step swap of the DB
             DB_type.exportDB(final_dict,DB_loc)
+            upload_to_hf_flag=bool(int(os.getenv("UPLOAD_TO_HF")))
+            if upload_to_hf_flag:
+                upload_to_hf(src)
         print("Biletowa baza danych jest aktualna")
         
         await asyncio.sleep(wait_time)

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [
     {
         "Title": " Moving rooms+ ",
@@ -330,3 +331,8 @@
         "free seats total": 0
     }
 ]
+=======
+version https://git-lfs.github.com/spec/v1
+oid sha256:87678b4189a98c76761205cdf4b5697a0758896015dfa307ae2ff4544aaac819
+size 11513
+>>>>>>> 1b07266 (Added handling of .env for uvicorn to merge huggingface and git)

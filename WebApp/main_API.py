@@ -7,8 +7,6 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request,Form
 from concurrent.futures import ThreadPoolExecutor
  
-from HF_download import upload_to_hf
-
 def create_lifespan( run_background_process :bool ):
     @asynccontextmanager
     async def lifespan(app : FastAPI):
@@ -31,7 +29,10 @@ def create_lifespan( run_background_process :bool ):
         if run_background_process:
             bg_task.cancel()
             executor.shutdown(wait=True)
-            await bg_task
+            try:
+                await bg_task
+            except asyncio.CancelledError:
+                print("Background task has been succesfully shut-down.")
     return lifespan
     
 #Start the API

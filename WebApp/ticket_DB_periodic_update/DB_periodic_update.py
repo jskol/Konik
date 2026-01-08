@@ -46,35 +46,35 @@ async def do_DB_update(
                 # an event dict
                 loop = asyncio.get_running_loop()
                 try:
-                    await loop.run_in_executor(None,update_shows_dict,event_dict)
-                
+                    await loop.run_in_executor(None,update_shows_dict,event_dict)                  
+                    final_dict=export_dict(event_dict)
+                    #Make a legacy version
+                    src=DB_loc+f'.{DB_type._extension}'
+                    src_copy=DB_loc+f'_OLD.{DB_type._extension}'
+                    if os.path.exists(src):
+                        curr_date=datetime.datetime.now()
+                        date_str=curr_date.strftime("%d/%m/%Y %H:%M:%S")
+                        print(f"Robię kopię DB {src}->{src_copy} o {date_str}")
+                        try:
+                            shutil.copyfile(
+                                src,
+                                src_copy
+                            )
+                        except FileNotFoundError:
+                            print(f'Nie powiodło się tworzenie {src_copy}')
+                            
+                    # Do a two step swap of the DB
+                    DB_type.exportDB(final_dict,DB_loc)
+                    upload_to_hf_flag=bool(int(os.getenv("UPLOAD_TO_HF")))
+                    if upload_to_hf_flag:
+                        upload_to_hf(src)
+
                 except Exception as e:
-                    print(f"Pojawił się problem {e}") 
-                
-                final_dict=export_dict(event_dict)
-                #Make a legacy version
-                src=DB_loc+f'.{DB_type._extension}'
-                src_copy=DB_loc+f'_OLD.{DB_type._extension}'
-                if os.path.exists(src):
-                    curr_date=datetime.datetime.now()
-                    date_str=curr_date.strftime("%d/%m/%Y %H:%M:%S")
-                    print(f"Robię kopię DB {src}->{src_copy} o {date_str}")
-                    try:
-                        shutil.copyfile(
-                            src,
-                            src_copy
-                        )
-                    except FileNotFoundError:
-                        print(f'Nie powiodło się tworzenie {src_copy}')
-                        
-                # Do a two step swap of the DB
-                DB_type.exportDB(final_dict,DB_loc)
-                upload_to_hf_flag=bool(int(os.getenv("UPLOAD_TO_HF")))
-                if upload_to_hf_flag:
-                    upload_to_hf(src)
+                    print(f"Pojawił się problem {e} i nie będę aktualizował bazy danych") 
+
             print("Biletowa baza danych jest aktualna")
-            
-            await asyncio.sleep(wait_time)
+            for _ in range(wait_time//120):
+                await asyncio.sleep(120)
     except asyncio.CancelledError:
         print("DB update forced to stop.")
         raise

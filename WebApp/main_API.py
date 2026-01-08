@@ -6,7 +6,7 @@ from ticket_DB_periodic_update.DB_periodic_update import do_DB_update # one of t
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request,Form
 from concurrent.futures import ThreadPoolExecutor
-
+ 
 def create_lifespan( run_background_process :bool ):
     @asynccontextmanager
     async def lifespan(app : FastAPI):
@@ -17,6 +17,7 @@ def create_lifespan( run_background_process :bool ):
             DB=TicketDBJSON()
             executor = ThreadPoolExecutor(max_workers=2)
             bg_task = asyncio.create_task(do_DB_update(DB,12,4*3600)) # This will run in the background 
+            
             # In future also notification option will
             # be added to this part 
         else:
@@ -28,26 +29,38 @@ def create_lifespan( run_background_process :bool ):
         if run_background_process:
             bg_task.cancel()
             executor.shutdown(wait=True)
-            await bg_task
+            try:
+                await bg_task
+            except asyncio.CancelledError:
+                print("Background task has been succesfully shut-down.")
     return lifespan
     
 #Start the API
-webapp_lifespan=create_lifespan(False)
-webapp=FastAPI(lifespan=webapp_lifespan)
-'''
-# Necessary to enforce HTTPS in headers
-from fastapi.middleware.trustedhost import TrustedHostMiddleware
-from starlette.middleware.base import BaseHTTPMiddleware
-class HTTPSRedirectMiddleware(BaseHTTPMiddleware):
-    async def dispatch(self, request, call_next):
-        # To mówi FastAPI: "Traktuj wszystkie zapytania jak HTTPS"
-        request.scope["scheme"] = "https"
-        response = await call_next(request)
-        return response
-webapp.add_middleware(HTTPSRedirectMiddleware)
-'''
 
-import os,sys
+import os
+# Use getenv to skip background updates
+# For docker runs the ENVs are set to true
+# while doing local_runs
+background_run=bool(int(os.getenv("RUN_IN_BACKGROUND")))
+webapp_lifespan=create_lifespan(background_run)
+webapp=FastAPI(lifespan=webapp_lifespan)
+
+
+# Necessary to enforce HTTPS in headers
+hande_https=bool(int(os.getenv("HANDLE_HTTPS")))
+if hande_https:
+    from fastapi.middleware.trustedhost import TrustedHostMiddleware
+    from starlette.middleware.base import BaseHTTPMiddleware
+    class HTTPSRedirectMiddleware(BaseHTTPMiddleware):
+        async def dispatch(self, request, call_next):
+            # To mówi FastAPI: "Traktuj wszystkie zapytania jak HTTPS"
+            request.scope["scheme"] = "https"
+            response = await call_next(request)
+            return response
+    webapp.add_middleware(HTTPSRedirectMiddleware)
+
+
+import sys
 curr_dir=os.path.dirname(os.path.abspath(__file__))
 
 # Mount location of static data like pictures etc. ...
@@ -96,8 +109,6 @@ from tickets_helpers import fix_name,read_DB,create_calendar
 # Import DataBase format
 from app.create_ticket_database.data_base import TicketDBJSON
 # Functionality for hangling the calndar option
-
-
 @webapp.get("/tickets/{event_num}",response_class=HTMLResponse)
 async def print_tickets(request: Request,
                        event_num:int):

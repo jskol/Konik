@@ -41,6 +41,7 @@ def read_DB(
     #create_DB_if_missing(DB,DB_location,num_of_months=2,event_type_in_list=event_num)
     #Get last update time
     path=pathlib.Path(DB_location+f'.{DB._extension}')
+    print(f'full path is {path} and the abb version is {os.path.basename(path)}')
     time=path.stat().st_mtime
     date_str=datetime.datetime.fromtimestamp(time).strftime("%d/%m/%Y @ %H:%M")
     event_dict=DB.importDB(DB_location)

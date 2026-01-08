@@ -67,11 +67,13 @@ async def do_DB_update(
                     DB_type.exportDB(final_dict,DB_loc)
                     upload_to_hf_flag=bool(int(os.getenv("UPLOAD_TO_HF")))
                     if upload_to_hf_flag:
-                        upload_to_hf(src)
+                        await loop.run_in_executor(None,upload_to_hf,src)
 
                 except Exception as e:
                     print(f"Pojawił się problem {e} i nie będę aktualizował bazy danych") 
 
+                finally:
+                    gc.collect()
             print("Biletowa baza danych jest aktualna")
             for _ in range(wait_time//120):
                 await asyncio.sleep(120)

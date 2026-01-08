@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 [
     {
         "Title": " Chorus Opera ",
@@ -10,6 +11,39 @@
         "Balkon I - lewa strona": 0,
         "Balkon I - srodek": 63,
         "Balkon I - prawa strona": 15,
+=======
+[
+    {
+        "Title": " La boh\u00e8me ",
+        "Date": "16/01/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " La boh\u00e8me ",
+        "Date": "17/01/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " La boh\u00e8me ",
+        "Date": "18/01/2026 18:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " La boh\u00e8me ",
+        "Date": "23/01/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " La boh\u00e8me ",
+        "Date": "24/01/2026 19:00",
+        "free seats total": 0,
+        "1. Plan gowny": 0,
+        "Parter": 0,
+        "Amfiteatr": 0,
+        "Balkon I - lewa strona": 0,
+        "Balkon I - srodek": 0,
+        "Balkon I - prawa strona": 0,
+>>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
         "Balkon II - lewa strona": 0,
         "Balkon II - srodek": 0,
         "Balkon II - prawa strona": 0,
@@ -18,6 +52,7 @@
         "Balkon III - prawa strona": 0
     },
     {
+<<<<<<< HEAD
         "Title": " Chorus Opera ",
         "Date": "28/01/2026 19:00",
         "free seats total": 77,
@@ -33,10 +68,67 @@
         "Balkon III - lewa strona": 0,
         "Balkon III - srodek": 0,
         "Balkon III - prawa strona": 0
+=======
+        "Title": " La boh\u00e8me ",
+        "Date": "25/01/2026 18:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Chorus Opera ",
+        "Date": "22/01/2026 19:00",
+        "free seats total": 78,
+        "1. Plan gowny": 0,
+        "Parter": 41,
+        "Amfiteatr": 14,
+        "Balkon I - lewa strona": 9,
+        "Balkon I - srodek": 1,
+        "Balkon I - prawa strona": 1,
+        "Balkon II - lewa strona": 7,
+        "Balkon II - srodek": 0,
+        "Balkon II - prawa strona": 0,
+        "Balkon III - lewa strona": 1,
+        "Balkon III - srodek": 0,
+        "Balkon III - prawa strona": 4
+    },
+    {
+        "Title": " Chorus Opera ",
+        "Date": "27/01/2026 19:00",
+        "free seats total": 153,
+        "1. Plan gowny": 0,
+        "Parter": 54,
+        "Amfiteatr": 36,
+        "Balkon I - lewa strona": 12,
+        "Balkon I - srodek": 1,
+        "Balkon I - prawa strona": 5,
+        "Balkon II - lewa strona": 10,
+        "Balkon II - srodek": 0,
+        "Balkon II - prawa strona": 11,
+        "Balkon III - lewa strona": 12,
+        "Balkon III - srodek": 2,
+        "Balkon III - prawa strona": 10
+    },
+    {
+        "Title": " Chorus Opera ",
+        "Date": "28/01/2026 19:00",
+        "free seats total": 183,
+        "1. Plan gowny": 0,
+        "Parter": 63,
+        "Amfiteatr": 28,
+        "Balkon I - lewa strona": 26,
+        "Balkon I - srodek": 2,
+        "Balkon I - prawa strona": 14,
+        "Balkon II - lewa strona": 12,
+        "Balkon II - srodek": 0,
+        "Balkon II - prawa strona": 11,
+        "Balkon III - lewa strona": 14,
+        "Balkon III - srodek": 0,
+        "Balkon III - prawa strona": 13
+>>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
     },
     {
         "Title": " Chorus Opera ",
         "Date": "22/04/2026 19:00",
+<<<<<<< HEAD
         "free seats total": 87,
         "1. Plan gowny": 0,
         "Parter": 10,
@@ -49,11 +141,26 @@
         "Balkon II - prawa strona": 2,
         "Balkon III - lewa strona": 3,
         "Balkon III - srodek": 10,
+=======
+        "free seats total": 180,
+        "1. Plan gowny": 0,
+        "Parter": 13,
+        "Amfiteatr": 59,
+        "Balkon I - lewa strona": 2,
+        "Balkon I - srodek": 3,
+        "Balkon I - prawa strona": 1,
+        "Balkon II - lewa strona": 9,
+        "Balkon II - srodek": 66,
+        "Balkon II - prawa strona": 4,
+        "Balkon III - lewa strona": 3,
+        "Balkon III - srodek": 18,
+>>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
         "Balkon III - prawa strona": 2
     },
     {
         "Title": " Chorus Opera ",
         "Date": "23/04/2026 19:00",
+<<<<<<< HEAD
         "free seats total": 180,
         "1. Plan gowny": 0,
         "Parter": 15,
@@ -66,11 +173,26 @@
         "Balkon II - prawa strona": 2,
         "Balkon III - lewa strona": 3,
         "Balkon III - srodek": 25,
+=======
+        "free seats total": 280,
+        "1. Plan gowny": 0,
+        "Parter": 47,
+        "Amfiteatr": 125,
+        "Balkon I - lewa strona": 5,
+        "Balkon I - srodek": 1,
+        "Balkon I - prawa strona": 11,
+        "Balkon II - lewa strona": 13,
+        "Balkon II - srodek": 37,
+        "Balkon II - prawa strona": 8,
+        "Balkon III - lewa strona": 3,
+        "Balkon III - srodek": 27,
+>>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
         "Balkon III - prawa strona": 3
     },
     {
         "Title": " Chorus Opera ",
         "Date": "28/04/2026 19:00",
+<<<<<<< HEAD
         "free seats total": 484,
         "1. Plan gowny": 0,
         "Parter": 81,
@@ -83,11 +205,26 @@
         "Balkon II - prawa strona": 6,
         "Balkon III - lewa strona": 7,
         "Balkon III - srodek": 25,
+=======
+        "free seats total": 716,
+        "1. Plan gowny": 0,
+        "Parter": 122,
+        "Amfiteatr": 278,
+        "Balkon I - lewa strona": 14,
+        "Balkon I - srodek": 34,
+        "Balkon I - prawa strona": 14,
+        "Balkon II - lewa strona": 32,
+        "Balkon II - srodek": 132,
+        "Balkon II - prawa strona": 32,
+        "Balkon III - lewa strona": 7,
+        "Balkon III - srodek": 44,
+>>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
         "Balkon III - prawa strona": 7
     },
     {
         "Title": " Chorus Opera ",
         "Date": "29/04/2026 19:00",
+<<<<<<< HEAD
         "free seats total": 512,
         "1. Plan gowny": 0,
         "Parter": 134,
@@ -100,6 +237,20 @@
         "Balkon II - prawa strona": 34,
         "Balkon III - lewa strona": 5,
         "Balkon III - srodek": 28,
+=======
+        "free seats total": 682,
+        "1. Plan gowny": 0,
+        "Parter": 163,
+        "Amfiteatr": 282,
+        "Balkon I - lewa strona": 13,
+        "Balkon I - srodek": 22,
+        "Balkon I - prawa strona": 15,
+        "Balkon II - lewa strona": 32,
+        "Balkon II - srodek": 57,
+        "Balkon II - prawa strona": 34,
+        "Balkon III - lewa strona": 7,
+        "Balkon III - srodek": 47,
+>>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
         "Balkon III - prawa strona": 10
     },
     {
@@ -110,22 +261,86 @@
     {
         "Title": " Kobieta bez cienia ",
         "Date": "18/02/2026 19:00",
+<<<<<<< HEAD
         "free seats total": 0
+=======
+        "free seats total": 0,
+        "1. Plan gowny": 0,
+        "Parter": 0,
+        "Amfiteatr": 0,
+        "Balkon I - lewa strona": 0,
+        "Balkon I - srodek": 0,
+        "Balkon I - prawa strona": 0,
+        "Balkon II - lewa strona": 0,
+        "Balkon II - srodek": 0,
+        "Balkon II - prawa strona": 0,
+        "Balkon III - lewa strona": 0,
+        "Balkon III - srodek": 0,
+        "Balkon III - prawa strona": 0
+>>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
     },
     {
         "Title": " Kobieta bez cienia ",
         "Date": "21/02/2026 19:00",
+<<<<<<< HEAD
         "free seats total": 0
+=======
+        "free seats total": 0,
+        "1. Plan gowny": 0,
+        "Parter": 0,
+        "Amfiteatr": 0,
+        "Balkon I - lewa strona": 0,
+        "Balkon I - srodek": 0,
+        "Balkon I - prawa strona": 0,
+        "Balkon II - lewa strona": 0,
+        "Balkon II - srodek": 0,
+        "Balkon II - prawa strona": 0,
+        "Balkon III - lewa strona": 0,
+        "Balkon III - srodek": 0,
+        "Balkon III - prawa strona": 0
+>>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
     },
     {
         "Title": " Kobieta bez cienia ",
         "Date": "25/02/2026 19:00",
+<<<<<<< HEAD
         "free seats total": 0
+=======
+        "free seats total": 1,
+        "1. Plan gowny": 0,
+        "Parter": 0,
+        "Amfiteatr": 0,
+        "Balkon I - lewa strona": 0,
+        "Balkon I - srodek": 1,
+        "Balkon I - prawa strona": 0,
+        "Balkon II - lewa strona": 0,
+        "Balkon II - srodek": 0,
+        "Balkon II - prawa strona": 0,
+        "Balkon III - lewa strona": 0,
+        "Balkon III - srodek": 0,
+        "Balkon III - prawa strona": 0
+>>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
     },
     {
         "Title": " Kobieta bez cienia ",
         "Date": "28/02/2026 19:00",
+<<<<<<< HEAD
         "free seats total": 0
+=======
+        "free seats total": 0,
+        "1. Plan gowny": 0,
+        "Parter": 0,
+        "Amfiteatr": 0,
+        "Balkon I - lewa strona": 0,
+        "Balkon I - srodek": 0,
+        "Balkon I - prawa strona": 0,
+        "Balkon II - lewa strona": 0,
+        "Balkon II - srodek": 0,
+        "Balkon II - prawa strona": 0,
+        "Balkon III - lewa strona": 0,
+        "Balkon III - srodek": 0,
+        "Balkon III - prawa strona": 0
+>>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
     },
     {
         "Title": " Pasa\u017cerka ",
@@ -262,9 +477,13 @@
         "Date": "24/06/2026 19:00",
         "free seats total": 0
     }
+<<<<<<< HEAD
 ]
 =======
 version https://git-lfs.github.com/spec/v1
 oid sha256:3fa66b1f243d4268f709d46a2f93ca515ad8059090c76073e21dd471560ac435
 size 11013
 >>>>>>> 1b07266 (Added handling of .env for uvicorn to merge huggingface and git)
+=======
+]
+>>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))

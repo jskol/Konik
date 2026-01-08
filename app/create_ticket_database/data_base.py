@@ -155,8 +155,19 @@ class TicketDBJSON(TicketDataBase):
                 temp_dict[k_1]=v_1
             list_of_dicts.append(temp_dict)
         
-        with open(out_f_name+f'.{self._extension}' , 'w') as f:
-            json.dump(list_of_dicts,f,indent=4)
+        # Atomic DB-save using os.replace
+        temp_file = f"{out_f_name}.{self._extension}.tmp"       
+        try:
+            with open(temp_file, 'w', encoding='utf-8') as f:
+                json.dump(list_of_dicts,f,indent=4)
+                f.flush()
+                os.fsync(f.fileno()) # Wymuszamy fizyczny zapis na dysk
+            os.replace(temp_file, f'{out_f_name}.{self._extension}')
+        
+        except Exception as e:
+            print(f"Błąd podczas zapisu bazy danych: {e}")
+            if os.path.exists(temp_file):
+                os.remove(temp_file)
     
     def importDB(self,  f_name: str)-> dict[tuple[str,str],dict[str,int]]:
         '''
@@ -167,7 +178,7 @@ class TicketDBJSON(TicketDataBase):
         so do not pass it in f_name
         '''
 
-        with open(f_name+f'.{self._extension}','r') as f:
+        with open(f'{f_name}.{self._extension}','r') as f:
             legacy_DB=json.load(f)
         # Recast back to a dictonary wit tuple key
         legacy_DB_dict={}

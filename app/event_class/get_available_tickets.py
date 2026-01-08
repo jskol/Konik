@@ -66,7 +66,6 @@ def get_available_tickets(date: datetime.datetime, link : str,  verbose:bool=Fal
     a dict of free seats in sectors
     '''
     try:
-
         redirected_link=check_link(date,link,verbose)
         seat_dict={}
         layout = get_number_of_sections(redirected_link)

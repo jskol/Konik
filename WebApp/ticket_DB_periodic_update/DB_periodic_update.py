@@ -41,8 +41,12 @@ async def do_DB_update(
             # in this case in-place changes to
             # an event dict
             loop = asyncio.get_running_loop()
-            await loop.run_in_executor(None,update_shows_dict,event_dict)
-             
+            try:
+                await loop.run_in_executor(None,update_shows_dict,event_dict)
+            
+            except Exception as e:
+                print(f"Pojawił się problem {e}") 
+            
             final_dict=export_dict(event_dict)
             #Make a legacy version
             src=DB_loc+f'.{DB_type._extension}'

@@ -80,14 +80,14 @@
     {
         "Title": " Chorus Opera ",
         "Date": "22/01/2026 19:00",
-        "free seats total": 69,
+        "free seats total": 47,
         "1. Plan gowny": 0,
-        "Parter": 36,
-        "Amfiteatr": 14,
-        "Balkon I - lewa strona": 8,
+        "Parter": 28,
+        "Amfiteatr": 8,
+        "Balkon I - lewa strona": 6,
         "Balkon I - srodek": 1,
         "Balkon I - prawa strona": 1,
-        "Balkon II - lewa strona": 7,
+        "Balkon II - lewa strona": 1,
         "Balkon II - srodek": 0,
         "Balkon II - prawa strona": 0,
         "Balkon III - lewa strona": 1,
@@ -97,16 +97,16 @@
     {
         "Title": " Chorus Opera ",
         "Date": "27/01/2026 19:00",
-        "free seats total": 157,
+        "free seats total": 148,
         "1. Plan gowny": 0,
-        "Parter": 58,
-        "Amfiteatr": 36,
+        "Parter": 52,
+        "Amfiteatr": 34,
         "Balkon I - lewa strona": 12,
         "Balkon I - srodek": 1,
         "Balkon I - prawa strona": 5,
         "Balkon II - lewa strona": 10,
         "Balkon II - srodek": 0,
-        "Balkon II - prawa strona": 11,
+        "Balkon II - prawa strona": 10,
         "Balkon III - lewa strona": 12,
         "Balkon III - srodek": 2,
         "Balkon III - prawa strona": 10
@@ -114,24 +114,25 @@
     {
         "Title": " Chorus Opera ",
         "Date": "28/01/2026 19:00",
-        "free seats total": 183,
+        "free seats total": 174,
         "1. Plan gowny": 0,
-        "Parter": 63,
-        "Amfiteatr": 28,
-        "Balkon I - lewa strona": 26,
-        "Balkon I - srodek": 2,
+        "Parter": 60,
+        "Amfiteatr": 27,
+        "Balkon I - lewa strona": 22,
+        "Balkon I - srodek": 1,
         "Balkon I - prawa strona": 14,
         "Balkon II - lewa strona": 12,
         "Balkon II - srodek": 0,
         "Balkon II - prawa strona": 11,
-        "Balkon III - lewa strona": 14,
-        "Balkon III - srodek": 0,
+        "Balkon III - lewa strona": 12,
+        "Balkon III - srodek": 2,
         "Balkon III - prawa strona": 13
 >>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
     },
     {
         "Title": " Chorus Opera ",
         "Date": "22/04/2026 19:00",
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         "free seats total": 87,
@@ -151,13 +152,16 @@
 =======
         "free seats total": 183,
 >>>>>>> c56c091 (new try...except in get_available_tickets to hangle the page url not matching the default structure)
+=======
+        "free seats total": 181,
+>>>>>>> a7b2529 (updated DB)
         "1. Plan gowny": 0,
         "Parter": 13,
         "Amfiteatr": 62,
         "Balkon I - lewa strona": 2,
         "Balkon I - srodek": 3,
         "Balkon I - prawa strona": 1,
-        "Balkon II - lewa strona": 9,
+        "Balkon II - lewa strona": 7,
         "Balkon II - srodek": 66,
         "Balkon II - prawa strona": 4,
         "Balkon III - lewa strona": 3,
@@ -168,6 +172,7 @@
     {
         "Title": " Chorus Opera ",
         "Date": "23/04/2026 19:00",
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         "free seats total": 180,
@@ -187,14 +192,17 @@
 =======
         "free seats total": 278,
 >>>>>>> c56c091 (new try...except in get_available_tickets to hangle the page url not matching the default structure)
+=======
+        "free seats total": 272,
+>>>>>>> a7b2529 (updated DB)
         "1. Plan gowny": 0,
         "Parter": 45,
-        "Amfiteatr": 125,
+        "Amfiteatr": 121,
         "Balkon I - lewa strona": 5,
         "Balkon I - srodek": 1,
         "Balkon I - prawa strona": 11,
         "Balkon II - lewa strona": 13,
-        "Balkon II - srodek": 37,
+        "Balkon II - srodek": 35,
         "Balkon II - prawa strona": 8,
         "Balkon III - lewa strona": 3,
         "Balkon III - srodek": 27,
@@ -204,6 +212,7 @@
     {
         "Title": " Chorus Opera ",
         "Date": "28/04/2026 19:00",
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         "free seats total": 484,
@@ -223,15 +232,18 @@
 =======
         "free seats total": 696,
 >>>>>>> c56c091 (new try...except in get_available_tickets to hangle the page url not matching the default structure)
+=======
+        "free seats total": 643,
+>>>>>>> a7b2529 (updated DB)
         "1. Plan gowny": 0,
         "Parter": 122,
-        "Amfiteatr": 258,
+        "Amfiteatr": 247,
         "Balkon I - lewa strona": 14,
         "Balkon I - srodek": 34,
         "Balkon I - prawa strona": 14,
         "Balkon II - lewa strona": 32,
-        "Balkon II - srodek": 132,
-        "Balkon II - prawa strona": 32,
+        "Balkon II - srodek": 92,
+        "Balkon II - prawa strona": 30,
         "Balkon III - lewa strona": 7,
         "Balkon III - srodek": 44,
 >>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
@@ -240,6 +252,7 @@
     {
         "Title": " Chorus Opera ",
         "Date": "29/04/2026 19:00",
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         "free seats total": 512,
@@ -259,9 +272,12 @@
 =======
         "free seats total": 680,
 >>>>>>> c56c091 (new try...except in get_available_tickets to hangle the page url not matching the default structure)
+=======
+        "free seats total": 679,
+>>>>>>> a7b2529 (updated DB)
         "1. Plan gowny": 0,
         "Parter": 163,
-        "Amfiteatr": 280,
+        "Amfiteatr": 279,
         "Balkon I - lewa strona": 13,
         "Balkon I - srodek": 22,
         "Balkon I - prawa strona": 15,
@@ -419,19 +435,7 @@
     {
         "Title": " Falstaff ",
         "Date": "25/04/2026 19:00",
-        "free seats total": 2,
-        "1. Plan gowny": 0,
-        "Parter": 0,
-        "Amfiteatr": 2,
-        "Balkon I - lewa strona": 0,
-        "Balkon I - srodek": 0,
-        "Balkon I - prawa strona": 0,
-        "Balkon II - lewa strona": 0,
-        "Balkon II - srodek": 0,
-        "Balkon II - prawa strona": 0,
-        "Balkon III - lewa strona": 0,
-        "Balkon III - srodek": 0,
-        "Balkon III - prawa strona": 0
+        "free seats total": 0
     },
     {
         "Title": " Falstaff ",

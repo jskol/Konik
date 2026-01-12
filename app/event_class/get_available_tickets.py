@@ -44,9 +44,13 @@ def get_ticket_num_in_sector(link:str)->int|None:
         payload={}
         for key_names in keys_ticketer:
             key_str='%s=.*?;'%key_names
-            text=re.search(key_str, init_resp.text)
-            val= re.sub('\'','',text.group().rstrip(';')).split('=')[-1]
-            payload[key_names]=val
+            try:
+                text=re.search(key_str, init_resp.text)
+                val= re.sub('\'','',text.group().rstrip(';')).split('=')[-1]
+                payload[key_names]=val
+            except Exception as e:
+                print(f'Problem z {key_names} ({e}) omijam')
+
         repsonse=requests.post(url_for_ticketer,params=payload)
         repsonse.raise_for_status()
         num_of_seats=0
@@ -56,7 +60,9 @@ def get_ticket_num_in_sector(link:str)->int|None:
         return num_of_seats
     except requests.exceptions.HTTPError:
         print("Page is missing")
-    
+        return 0 # assume no tickets if page is not available
+
+     
 
 def get_available_tickets(date: datetime.datetime, link : str,  verbose:bool=False)->tuple[int,dict[str,int]]:
     '''
@@ -66,7 +72,6 @@ def get_available_tickets(date: datetime.datetime, link : str,  verbose:bool=Fal
     a dict of free seats in sectors
     '''
     try:
-
         redirected_link=check_link(date,link,verbose)
         seat_dict={}
         layout = get_number_of_sections(redirected_link)

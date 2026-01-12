@@ -70,6 +70,7 @@ class event:
         self.free_seats=tickets_num
         self.seats_dict=tickets_dict
         print(f' -> {self.free_seats} seats left')
+        
     def print_seats_dict(self)->None:
         for k,v in self.seats_dict.items():
             print(f'{k} has {v} seats')

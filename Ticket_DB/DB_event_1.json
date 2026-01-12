@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-[
-    {
-        "Title": " Chorus Opera ",
-        "Date": "27/01/2026 19:00",
-        "free seats total": 86,
-        "1. Plan gowny": 0,
-        "Parter": 5,
-        "Amfiteatr": 3,
-        "Balkon I - lewa strona": 0,
-        "Balkon I - srodek": 63,
-        "Balkon I - prawa strona": 15,
-=======
 [
     {
         "Title": " La boh\u00e8me ",
@@ -36,43 +22,9 @@
     {
         "Title": " La boh\u00e8me ",
         "Date": "24/01/2026 19:00",
-<<<<<<< HEAD
-        "free seats total": 0,
-        "1. Plan gowny": 0,
-        "Parter": 0,
-        "Amfiteatr": 0,
-        "Balkon I - lewa strona": 0,
-        "Balkon I - srodek": 0,
-        "Balkon I - prawa strona": 0,
->>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
-        "Balkon II - lewa strona": 0,
-        "Balkon II - srodek": 0,
-        "Balkon II - prawa strona": 0,
-        "Balkon III - lewa strona": 0,
-        "Balkon III - srodek": 0,
-        "Balkon III - prawa strona": 0
-=======
         "free seats total": 0
->>>>>>> c56c091 (new try...except in get_available_tickets to hangle the page url not matching the default structure)
     },
     {
-<<<<<<< HEAD
-        "Title": " Chorus Opera ",
-        "Date": "28/01/2026 19:00",
-        "free seats total": 77,
-        "1. Plan gowny": 0,
-        "Parter": 11,
-        "Amfiteatr": 3,
-        "Balkon I - lewa strona": 10,
-        "Balkon I - srodek": 46,
-        "Balkon I - prawa strona": 7,
-        "Balkon II - lewa strona": 0,
-        "Balkon II - srodek": 0,
-        "Balkon II - prawa strona": 0,
-        "Balkon III - lewa strona": 0,
-        "Balkon III - srodek": 0,
-        "Balkon III - prawa strona": 0
-=======
         "Title": " La boh\u00e8me ",
         "Date": "25/01/2026 18:00",
         "free seats total": 0
@@ -127,34 +79,11 @@
         "Balkon III - lewa strona": 12,
         "Balkon III - srodek": 2,
         "Balkon III - prawa strona": 13
->>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
     },
     {
         "Title": " Chorus Opera ",
         "Date": "22/04/2026 19:00",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "free seats total": 87,
-        "1. Plan gowny": 0,
-        "Parter": 10,
-        "Amfiteatr": 19,
-        "Balkon I - lewa strona": 1,
-        "Balkon I - srodek": 3,
-        "Balkon I - prawa strona": 1,
-        "Balkon II - lewa strona": 1,
-        "Balkon II - srodek": 35,
-        "Balkon II - prawa strona": 2,
-        "Balkon III - lewa strona": 3,
-        "Balkon III - srodek": 10,
-=======
-        "free seats total": 180,
-=======
-        "free seats total": 183,
->>>>>>> c56c091 (new try...except in get_available_tickets to hangle the page url not matching the default structure)
-=======
         "free seats total": 181,
->>>>>>> a7b2529 (updated DB)
         "1. Plan gowny": 0,
         "Parter": 13,
         "Amfiteatr": 62,
@@ -166,35 +95,12 @@
         "Balkon II - prawa strona": 4,
         "Balkon III - lewa strona": 3,
         "Balkon III - srodek": 18,
->>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
         "Balkon III - prawa strona": 2
     },
     {
         "Title": " Chorus Opera ",
         "Date": "23/04/2026 19:00",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "free seats total": 180,
-        "1. Plan gowny": 0,
-        "Parter": 15,
-        "Amfiteatr": 87,
-        "Balkon I - lewa strona": 5,
-        "Balkon I - srodek": 1,
-        "Balkon I - prawa strona": 5,
-        "Balkon II - lewa strona": 9,
-        "Balkon II - srodek": 25,
-        "Balkon II - prawa strona": 2,
-        "Balkon III - lewa strona": 3,
-        "Balkon III - srodek": 25,
-=======
-        "free seats total": 280,
-=======
-        "free seats total": 278,
->>>>>>> c56c091 (new try...except in get_available_tickets to hangle the page url not matching the default structure)
-=======
         "free seats total": 272,
->>>>>>> a7b2529 (updated DB)
         "1. Plan gowny": 0,
         "Parter": 45,
         "Amfiteatr": 121,
@@ -206,35 +112,12 @@
         "Balkon II - prawa strona": 8,
         "Balkon III - lewa strona": 3,
         "Balkon III - srodek": 27,
->>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
         "Balkon III - prawa strona": 3
     },
     {
         "Title": " Chorus Opera ",
         "Date": "28/04/2026 19:00",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "free seats total": 484,
-        "1. Plan gowny": 0,
-        "Parter": 81,
-        "Amfiteatr": 229,
-        "Balkon I - lewa strona": 11,
-        "Balkon I - srodek": 30,
-        "Balkon I - prawa strona": 9,
-        "Balkon II - lewa strona": 32,
-        "Balkon II - srodek": 47,
-        "Balkon II - prawa strona": 6,
-        "Balkon III - lewa strona": 7,
-        "Balkon III - srodek": 25,
-=======
-        "free seats total": 716,
-=======
-        "free seats total": 696,
->>>>>>> c56c091 (new try...except in get_available_tickets to hangle the page url not matching the default structure)
-=======
         "free seats total": 643,
->>>>>>> a7b2529 (updated DB)
         "1. Plan gowny": 0,
         "Parter": 122,
         "Amfiteatr": 247,
@@ -246,35 +129,12 @@
         "Balkon II - prawa strona": 30,
         "Balkon III - lewa strona": 7,
         "Balkon III - srodek": 44,
->>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
         "Balkon III - prawa strona": 7
     },
     {
         "Title": " Chorus Opera ",
         "Date": "29/04/2026 19:00",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "free seats total": 512,
-        "1. Plan gowny": 0,
-        "Parter": 134,
-        "Amfiteatr": 175,
-        "Balkon I - lewa strona": 10,
-        "Balkon I - srodek": 18,
-        "Balkon I - prawa strona": 13,
-        "Balkon II - lewa strona": 30,
-        "Balkon II - srodek": 55,
-        "Balkon II - prawa strona": 34,
-        "Balkon III - lewa strona": 5,
-        "Balkon III - srodek": 28,
-=======
-        "free seats total": 682,
-=======
-        "free seats total": 680,
->>>>>>> c56c091 (new try...except in get_available_tickets to hangle the page url not matching the default structure)
-=======
         "free seats total": 679,
->>>>>>> a7b2529 (updated DB)
         "1. Plan gowny": 0,
         "Parter": 163,
         "Amfiteatr": 279,
@@ -286,7 +146,6 @@
         "Balkon II - prawa strona": 34,
         "Balkon III - lewa strona": 7,
         "Balkon III - srodek": 47,
->>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
         "Balkon III - prawa strona": 10
     },
     {
@@ -297,9 +156,6 @@
     {
         "Title": " Kobieta bez cienia ",
         "Date": "18/02/2026 19:00",
-<<<<<<< HEAD
-        "free seats total": 0
-=======
         "free seats total": 0,
         "1. Plan gowny": 0,
         "Parter": 0,
@@ -313,14 +169,10 @@
         "Balkon III - lewa strona": 0,
         "Balkon III - srodek": 0,
         "Balkon III - prawa strona": 0
->>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
     },
     {
         "Title": " Kobieta bez cienia ",
         "Date": "21/02/2026 19:00",
-<<<<<<< HEAD
-        "free seats total": 0
-=======
         "free seats total": 0,
         "1. Plan gowny": 0,
         "Parter": 0,
@@ -334,19 +186,11 @@
         "Balkon III - lewa strona": 0,
         "Balkon III - srodek": 0,
         "Balkon III - prawa strona": 0
->>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
     },
     {
         "Title": " Kobieta bez cienia ",
         "Date": "25/02/2026 19:00",
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "free seats total": 0
-=======
-        "free seats total": 1,
-=======
         "free seats total": 0,
->>>>>>> c56c091 (new try...except in get_available_tickets to hangle the page url not matching the default structure)
         "1. Plan gowny": 0,
         "Parter": 0,
         "Amfiteatr": 0,
@@ -359,14 +203,10 @@
         "Balkon III - lewa strona": 0,
         "Balkon III - srodek": 0,
         "Balkon III - prawa strona": 0
->>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
     },
     {
         "Title": " Kobieta bez cienia ",
         "Date": "28/02/2026 19:00",
-<<<<<<< HEAD
-        "free seats total": 0
-=======
         "free seats total": 0,
         "1. Plan gowny": 0,
         "Parter": 0,
@@ -380,7 +220,6 @@
         "Balkon III - lewa strona": 0,
         "Balkon III - srodek": 0,
         "Balkon III - prawa strona": 0
->>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))
     },
     {
         "Title": " Pasa\u017cerka ",
@@ -517,13 +356,4 @@
         "Date": "24/06/2026 19:00",
         "free seats total": 0
     }
-<<<<<<< HEAD
 ]
-=======
-version https://git-lfs.github.com/spec/v1
-oid sha256:3fa66b1f243d4268f709d46a2f93ca515ad8059090c76073e21dd471560ac435
-size 11013
->>>>>>> 1b07266 (Added handling of .env for uvicorn to merge huggingface and git)
-=======
-]
->>>>>>> 15d5676 (mulitple minor corrections to deal with the huggingface isssues( atomic json dumping, etc.))

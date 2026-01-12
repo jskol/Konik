@@ -2,8 +2,10 @@ import os,sys
 
 curr_dir=os.path.dirname(os.path.abspath(__file__))
 parent_dir=os.path.dirname(curr_dir)
-sys.path.append(os.path.dirname(parent_dir))
 sys.path.append(parent_dir)
+from main_API import root_dir
+sys.path.append(root_dir)
+
 #Update bazy danych w tle co 24h
 from app.event_dict.gen_dict import gen_event_dict
 from app.event_dict.update_dict import update_shows_dict

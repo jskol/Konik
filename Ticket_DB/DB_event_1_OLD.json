@@ -1,3 +1,264 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:ff2d9d0a2782e171af1d7703cdc712a84df4ffcd3480930f0e49139430fdf89e
-size 10086
+[
+    {
+        "Title": " Chorus Opera ",
+        "Date": "27/01/2026 19:00",
+        "free seats total": 90,
+        "1. Plan gowny": 0,
+        "Parter": 6,
+        "Amfiteatr": 4,
+        "Balkon I - lewa strona": 0,
+        "Balkon I - srodek": 63,
+        "Balkon I - prawa strona": 17,
+        "Balkon II - lewa strona": 0,
+        "Balkon II - srodek": 0,
+        "Balkon II - prawa strona": 0,
+        "Balkon III - lewa strona": 0,
+        "Balkon III - srodek": 0,
+        "Balkon III - prawa strona": 0
+    },
+    {
+        "Title": " Chorus Opera ",
+        "Date": "28/01/2026 19:00",
+        "free seats total": 78,
+        "1. Plan gowny": 0,
+        "Parter": 13,
+        "Amfiteatr": 3,
+        "Balkon I - lewa strona": 10,
+        "Balkon I - srodek": 45,
+        "Balkon I - prawa strona": 7,
+        "Balkon II - lewa strona": 0,
+        "Balkon II - srodek": 0,
+        "Balkon II - prawa strona": 0,
+        "Balkon III - lewa strona": 0,
+        "Balkon III - srodek": 0,
+        "Balkon III - prawa strona": 0
+    },
+    {
+        "Title": " Chorus Opera ",
+        "Date": "22/04/2026 19:00",
+        "free seats total": 87,
+        "1. Plan gowny": 0,
+        "Parter": 10,
+        "Amfiteatr": 19,
+        "Balkon I - lewa strona": 1,
+        "Balkon I - srodek": 3,
+        "Balkon I - prawa strona": 1,
+        "Balkon II - lewa strona": 1,
+        "Balkon II - srodek": 35,
+        "Balkon II - prawa strona": 2,
+        "Balkon III - lewa strona": 3,
+        "Balkon III - srodek": 10,
+        "Balkon III - prawa strona": 2
+    },
+    {
+        "Title": " Chorus Opera ",
+        "Date": "23/04/2026 19:00",
+        "free seats total": 180,
+        "1. Plan gowny": 0,
+        "Parter": 15,
+        "Amfiteatr": 87,
+        "Balkon I - lewa strona": 5,
+        "Balkon I - srodek": 1,
+        "Balkon I - prawa strona": 5,
+        "Balkon II - lewa strona": 9,
+        "Balkon II - srodek": 25,
+        "Balkon II - prawa strona": 2,
+        "Balkon III - lewa strona": 3,
+        "Balkon III - srodek": 25,
+        "Balkon III - prawa strona": 3
+    },
+    {
+        "Title": " Chorus Opera ",
+        "Date": "28/04/2026 19:00",
+        "free seats total": 484,
+        "1. Plan gowny": 0,
+        "Parter": 81,
+        "Amfiteatr": 229,
+        "Balkon I - lewa strona": 11,
+        "Balkon I - srodek": 30,
+        "Balkon I - prawa strona": 9,
+        "Balkon II - lewa strona": 32,
+        "Balkon II - srodek": 47,
+        "Balkon II - prawa strona": 6,
+        "Balkon III - lewa strona": 7,
+        "Balkon III - srodek": 25,
+        "Balkon III - prawa strona": 7
+    },
+    {
+        "Title": " Chorus Opera ",
+        "Date": "29/04/2026 19:00",
+        "free seats total": 512,
+        "1. Plan gowny": 0,
+        "Parter": 134,
+        "Amfiteatr": 175,
+        "Balkon I - lewa strona": 10,
+        "Balkon I - srodek": 18,
+        "Balkon I - prawa strona": 13,
+        "Balkon II - lewa strona": 30,
+        "Balkon II - srodek": 55,
+        "Balkon II - prawa strona": 34,
+        "Balkon III - lewa strona": 5,
+        "Balkon III - srodek": 28,
+        "Balkon III - prawa strona": 10
+    },
+    {
+        "Title": " Kobieta bez cienia ",
+        "Date": "15/02/2026 18:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Kobieta bez cienia ",
+        "Date": "18/02/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Kobieta bez cienia ",
+        "Date": "21/02/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Kobieta bez cienia ",
+        "Date": "25/02/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Kobieta bez cienia ",
+        "Date": "28/02/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Pasa\u017cerka ",
+        "Date": "08/03/2026 18:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Pasa\u017cerka ",
+        "Date": "10/03/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Pasa\u017cerka ",
+        "Date": "12/03/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Simon Boccanegra ",
+        "Date": "19/03/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Simon Boccanegra ",
+        "Date": "21/03/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Simon Boccanegra ",
+        "Date": "24/03/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Falstaff ",
+        "Date": "17/04/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Falstaff ",
+        "Date": "18/04/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Falstaff ",
+        "Date": "19/04/2026 18:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Falstaff ",
+        "Date": "24/04/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Falstaff ",
+        "Date": "25/04/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Falstaff ",
+        "Date": "26/04/2026 18:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Traviata ",
+        "Date": "23/05/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Traviata ",
+        "Date": "24/05/2026 18:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Traviata ",
+        "Date": "26/05/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Traviata ",
+        "Date": "28/05/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Traviata ",
+        "Date": "29/05/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Traviata ",
+        "Date": "30/05/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Traviata ",
+        "Date": "31/05/2026 18:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Romeo i Julia ",
+        "Date": "13/06/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Romeo i Julia ",
+        "Date": "17/06/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Romeo i Julia ",
+        "Date": "19/06/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Romeo i Julia ",
+        "Date": "21/06/2026 18:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Romeo i Julia ",
+        "Date": "23/06/2026 19:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Mar\u00eda de Buenos Aires ",
+        "Date": "18/06/2026 20:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Mar\u00eda de Buenos Aires ",
+        "Date": "20/06/2026 20:00",
+        "free seats total": 0
+    },
+    {
+        "Title": " Mar\u00eda de Buenos Aires ",
+        "Date": "24/06/2026 19:00",
+        "free seats total": 0
+    }
+]

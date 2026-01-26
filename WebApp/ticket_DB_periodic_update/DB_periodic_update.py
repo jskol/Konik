@@ -4,7 +4,7 @@ import gc
 curr_dir=os.path.dirname(os.path.abspath(__file__))
 parent_dir=os.path.dirname(curr_dir)
 sys.path.append(parent_dir)
-from main_API import root_dir
+root_dir=os.path.dirname(parent_dir)
 sys.path.append(root_dir)
 
 #Update bazy danych w tle co 24h

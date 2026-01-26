@@ -29,6 +29,7 @@ if handle_https:
 
 import sys
 webapp_parent_dir=os.path.dirname(os.path.abspath(__file__))
+
 # Mount location of static data like pictures etc. ...
 from fastapi.staticfiles import StaticFiles
 webapp.mount("/static",
@@ -69,5 +70,5 @@ async def handle_event_pick(request:Request,
     return RedirectResponse(url=url_to_pass, status_code=303)
 
 # Get Subpage with tickets
-from API_modules import ticket_subpage #here is the print_tickets function defined
-webapp.include_router(ticket_subpage.router)
+from API_modules.ticket_subpage import router #here is the print_tickets function defined
+webapp.include_router(router)

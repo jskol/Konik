@@ -57,7 +57,8 @@ from fastapi.responses import HTMLResponse # import HTML respose
 async def welcome_page(request: Request):
     return templates.TemplateResponse("home.html",
                                       {"request": request,
-                                       "event_list": event_type_list
+                                       "event_list": event_type_list,
+                                       "url_for": request.url_for
                                        })
 
 ### Redirect to ticketing subpages

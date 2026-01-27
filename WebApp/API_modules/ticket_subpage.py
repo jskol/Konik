@@ -45,5 +45,6 @@ async def print_tickets(request: Request,
                                        "event_type_name": event_name_str,
                                         "dict_of_events":new_event_dict,
                                         "last_modified":  date_str,
-                                        "calendar_dict": calendar_dict
+                                        "calendar_dict": calendar_dict,
+                                        "url_for": request.url_for
                                        })

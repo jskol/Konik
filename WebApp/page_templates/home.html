@@ -40,7 +40,7 @@
         <form action="/pick_event" method="post">
         {% for event in event_list %}
              <button class="btn-with-img" name="event_num" value="{{ loop.index0 }}">
-                <img src="{{url_for('static',path='/images/'+event+'.jpg')}}"  alt="{{event}}">
+                <img src="{{url_for('static',path='images/'+event+'.jpg')}}"  alt="{{event}}">
                 <p>{{event}}</p>
             </button>
         {% endfor %}

@@ -19,18 +19,7 @@ from life_spans.life_span_no_mailing_list import create_lifespan
 background_run=bool(int(os.getenv("RUN_IN_BACKGROUND")))
 webapp_lifespan=create_lifespan(background_run)
 webapp=FastAPI(lifespan=webapp_lifespan)
-
-# Necessary to enforce HTTPS in headers
-from fastapi.middleware.trustedhost import TrustedHostMiddleware
-from starlette.middleware.base import BaseHTTPMiddleware
-class HTTPSRedirectMiddleware(BaseHTTPMiddleware):
-    async def dispatch(self, request, call_next):
-        # To mówi FastAPI: "Traktuj wszystkie zapytania jak HTTPS"
-        request.scope["scheme"] = "https"
-        response = await call_next(request)
-        return response
-webapp.add_middleware(HTTPSRedirectMiddleware)
-
+    
 # Necessary to enforce HTTPS in headers - IF NEEDED
 handle_https=bool(int(os.getenv("HANDLE_HTTPS")))
 if handle_https:

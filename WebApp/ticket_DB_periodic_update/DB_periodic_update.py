@@ -1,15 +1,19 @@
 import os,sys
+import gc
 
 curr_dir=os.path.dirname(os.path.abspath(__file__))
 parent_dir=os.path.dirname(curr_dir)
-sys.path.append(os.path.dirname(parent_dir))
 sys.path.append(parent_dir)
+root_dir=os.path.dirname(parent_dir)
+sys.path.append(root_dir)
+
 #Update bazy danych w tle co 24h
 from app.event_dict.gen_dict import gen_event_dict
 from app.event_dict.update_dict import update_shows_dict
 from app.event_dict.export_event_dict import export_dict
 from app.create_ticket_database.data_base import TicketDataBase
 from app.main import event_type_list
+import datetime
 import datetime
 import asyncio,shutil
 from HF_download import upload_to_hf
@@ -64,11 +68,13 @@ async def do_DB_update(
                     DB_type.exportDB(final_dict,DB_loc)
                     upload_to_hf_flag=bool(int(os.getenv("UPLOAD_TO_HF")))
                     if upload_to_hf_flag:
-                        upload_to_hf(src)
+                        await loop.run_in_executor(None,upload_to_hf,src)
 
                 except Exception as e:
                     print(f"Pojawił się problem {e} i nie będę aktualizował bazy danych") 
 
+                finally:
+                    gc.collect() # clear garbage
             print("Biletowa baza danych jest aktualna")
             for _ in range(wait_time//120):
                 await asyncio.sleep(120)

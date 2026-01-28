@@ -48,4 +48,6 @@ def check_link( date : datetime.datetime, link:str, print_res:bool=True) -> str:
         
     except requests.exceptions.HTTPError as err:
         print("Błąd w dostępnie do strony z biletami dla tego wydarzenia")
+        raise NoTickets("Brak bietów na to wydarzanie-Błąd strony")
+
 

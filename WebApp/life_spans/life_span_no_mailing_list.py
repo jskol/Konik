@@ -4,10 +4,8 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from concurrent.futures import ThreadPoolExecutor
 
-import os,sys
-curr_dir=os.path.dirname(os.path.abspath(__file__))
-parent_dir=os.path.dirname(curr_dir)
-root_dir=os.path.dirname(parent_dir)
+import sys
+from main_API import root_dir
 sys.path.append(root_dir)
 from app.create_ticket_database.data_base import TicketDBJSON
 from ticket_DB_periodic_update.DB_periodic_update import do_DB_update # one of the background processes

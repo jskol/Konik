@@ -1,3 +1,10 @@
+'''
+Set of subroutines to create subpages
+with tickets for certain events
+and with the calendat
+'''
+
+import os,sys
 import re
 def fix_name(event_type_name:str)->str:
     '''
@@ -7,10 +14,7 @@ def fix_name(event_type_name:str)->str:
     event_name_str=re.sub('a$','', event_name_str)
     event_name_str += 'y'
     return event_name_str
-
-import os,sys
-curr_dir=os.path.dirname(os.path.abspath(__file__))
-root_dir=os.path.dirname(curr_dir)
+from main_API import root_dir
 sys.path.append(root_dir)
 from app.create_ticket_database.data_base import TicketDataBase
 import pathlib,datetime
@@ -18,7 +22,8 @@ import pathlib,datetime
 
 def read_DB(
     DB:TicketDataBase,
-    event_num:int
+    event_num:int,
+    DB_dir_loc:str
     )->tuple[
         dict[tuple[str,str],dict[str,int]],
         str
@@ -31,9 +36,7 @@ def read_DB(
     2) string with date of the last modifiaction
     of the DB file
     '''
-    curr_dir=os.path.dirname(os.path.abspath(__file__))
-    root_dir=os.path.dirname(curr_dir)
-    DB_location=os.path.join(root_dir,'Ticket_DB',f'DB_event_{event_num}')
+    DB_location=os.path.join(DB_dir_loc,'Ticket_DB',f'DB_event_{event_num}')
     #Get last update time
     path=pathlib.Path(DB_location+f'.{DB._extension}')
     print(f'full path is {path} and the abb version is {os.path.basename(path)}')

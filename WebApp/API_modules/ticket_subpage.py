@@ -7,16 +7,9 @@ router=APIRouter(
 )
 
 # Import my logic
-import sys,os
-webapp_parent_dir=os.path.dirname(
-    os.path.dirname(
-        os.path.abspath(__file__)
-    )
-)
-sys.path.append(webapp_parent_dir)
-from tickets_helpers import fix_name,read_DB,create_calendar
-from main_API import root_dir
-from main_API import templates # Connect to the webpage templates
+import sys
+from API_modules.tickets_helpers import fix_name,read_DB,create_calendar
+from main_API import root_dir,templates
 
 sys.path.append(root_dir)
 from app.main import event_type_list
@@ -29,7 +22,7 @@ async def print_tickets(request: Request,
     event_name_str=fix_name(event_type_list[event_num])
     #Read the database
     DB=TicketDBJSON()
-    event_dict,date_str=read_DB(DB,event_num)
+    event_dict,date_str=read_DB(DB,event_num,root_dir)
     calendar_dict=create_calendar(event_dict)
     # Create a dict to pass to the webpage
     new_event_dict={}

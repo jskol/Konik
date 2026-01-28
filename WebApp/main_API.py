@@ -1,14 +1,20 @@
+#define locations relative to this file 
+import sys,os
+webapp_parent_dir=os.path.dirname(os.path.abspath(__file__))
+root_dir=os.path.dirname(webapp_parent_dir)
+###
+
+#Start the API 
+from fastapi import FastAPI,Request,Form
 # use lifespan to have processes running in the background
 #such as DB updates etc.
 #variuos create_lifespan functions will be kept in life_span folder
 from life_spans.life_span_no_mailing_list import create_lifespan
 
-#Start the API
-import os
-from fastapi import FastAPI,Request,Form
-# Use getenv to skip background updates
+# Use getenv to control if
+# the background updates are done
 # For docker runs the ENVs are set to true
-# while doing local_runs
+# For local run all is controlled by local_run.env
 
 background_run=bool(int(os.getenv("RUN_IN_BACKGROUND")))
 webapp_lifespan=create_lifespan(background_run)
@@ -28,11 +34,6 @@ if handle_https:
     webapp.add_middleware(HTTPSRedirectMiddleware)
 
 
-import sys
-curr_dir=os.path.dirname(os.path.abspath(__file__))
-webapp_parent_dir=os.path.dirname(os.path.abspath(__file__))
-
-
 # Mount location of static data like pictures etc. ...
 from fastapi.staticfiles import StaticFiles
 webapp.mount("/static",
@@ -40,7 +41,7 @@ webapp.mount("/static",
              name="static"
              )
 
-#Mount the templates for subpages 
+# Mount the templates for home- and sub-, pages 
 # All handled by Jinja2
 from fastapi.templating import Jinja2Templates
 templates=Jinja2Templates(
@@ -48,19 +49,20 @@ templates=Jinja2Templates(
     )
 
 ### HOME PAGE #####
-# import list of show types
-root_dir=os.path.dirname(webapp_parent_dir)
-sys.path.append(root_dir)
+# import list of show types and
+# display them in buttons -> controlled by 
+# template-home page
 from app.main import event_type_list
 from fastapi.responses import HTMLResponse # import HTML respose
 
 @webapp.get("/",response_class=HTMLResponse)
 async def welcome_page(request: Request):
-    return templates.TemplateResponse("home.html",
-                                      {"request": request,
-                                       "event_list": event_type_list,
-                                       "url_for": request.url_for
-                                       })
+    dict_for_template={          
+        "request": request,
+        "event_list": event_type_list,
+        "url_for": request.url_for
+    }
+    return templates.TemplateResponse("home.html",dict_for_template)
 
 ### Redirect to ticketing subpages
 ### depending on the decission that the 
@@ -73,7 +75,9 @@ async def handle_event_pick(request:Request,
     url_to_pass=request.url_for("print_tickets",event_num=event_num)
     return RedirectResponse(url=url_to_pass, status_code=303)
 
-# Get Subpage with tickets
-from API_modules import ticket_subpage #here is the print_tickets function defined
+# Genereate Subpages with tickets
+# get the subpage handling from
+# functions definde in API_modules directory
+from API_modules import ticket_subpage
 webapp.include_router(ticket_subpage.router)
 

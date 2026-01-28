@@ -17,6 +17,7 @@ import datetime
 import datetime
 import asyncio,shutil
 from HF_download import upload_to_hf
+
 async def do_DB_update(
     DB_type: TicketDataBase,
     months_in_advance:int,
@@ -73,7 +74,7 @@ async def do_DB_update(
                     print(f"Pojawił się problem {e} i nie będę aktualizował bazy danych") 
 
                 finally:
-                    gc.collect()
+                    gc.collect() # clear garbage
             print("Biletowa baza danych jest aktualna")
             for _ in range(wait_time//120):
                 await asyncio.sleep(120)

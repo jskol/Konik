@@ -9,6 +9,7 @@ from fastapi import FastAPI,Request,Form
 # Use getenv to skip background updates
 # For docker runs the ENVs are set to true
 # while doing local_runs
+
 background_run=bool(int(os.getenv("RUN_IN_BACKGROUND")))
 webapp_lifespan=create_lifespan(background_run)
 webapp=FastAPI(lifespan=webapp_lifespan)
@@ -75,3 +76,4 @@ async def handle_event_pick(request:Request,
 # Get Subpage with tickets
 from API_modules import ticket_subpage #here is the print_tickets function defined
 webapp.include_router(ticket_subpage.router)
+
